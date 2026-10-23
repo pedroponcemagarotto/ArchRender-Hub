@@ -116,3 +116,18 @@ python -m unittest discover -s tests -v
 - [Fluxo de novo chat](INICIAR_NOVO_CHAT.md)
 
 **Continuidade:** não reiniciar pesquisa de ferramentas a cada novo chat. Abrir esta PR, confirmar HEAD, verificar estados e avançar no primeiro item pendente que não dependa de material privado inexistente. **Sem merges e sem ações pagas automáticas.**
+
+
+## H. Curadoria de imagens públicas e pesquisa nos fóruns (autorizada)
+
+**Decisão 23/10/2026:** o usuário autorizou buscar **imagens adequadas da Internet** para ampliar os testes e orientou **pesquisar sites, fóruns técnicos, GitHub e documentações** durante as próximas etapas.
+
+- [Curadoria web e regra de pesquisa por lote](research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md): priorizar fonte original, autoria e licença verificáveis, dados reais de benchmarks e experiências de profissionais; documentar data de consulta, exceções e resultados.
+- [Catálogo de sete fontes públicas](catalog/fontes_publicas_r1.json): **2 cenas 3D e 5 fotografias** de interiores, lavanderia e fachadas; **metadados/links apenas**, sem download ou execução de benchmark.
+- Comando offline `python tools/metodo_integrado.py sources`, filtrável por `--category interiores` ou `--json`. Não acessa sites, não baixa nem edita imagens; fontes são atualizadas por curadoria verificada e revisão no GitHub.
+- Priorizar um **piloto público de geometria** com Blender Classroom (CC0 e modelo 3D real), depois caso real de cozinha/sala com referência original privada, quando acessível. Não contar uma foto de banco como substituta da mesma arquitetura do cliente.
+- Fotos Unsplash gratuitas/Pexels podem ser usadas respeitando a licença específica. **Não copiar imagens para a PR pública**. Poly Haven é CC0 para assets HDRIs/texturas/modelos, não necessariamente para capturas editoriais e fotos de terceiros.
+- Cada rodada R3 inclui **revisão de fontes recente e pertinente**, não investigação genérica infinita. Achados novos só alteram método após teste/QA.
+- **Condição atual:** R3-04 cozinha/sala continua `0/6`; as fontes públicas ainda não foram adquiridas e o CLI só expõe os links. Publicação de links no catálogo não é geração de imagem nem homologação.
+
+**Sem automação contínua criada:** a pesquisa passa a ser regra do trabalho em cada lote, quando houver execução. Monitoramento agendado de fóruns só deve ser criado mediante pedido de frequência e conteúdo pelo usuário.
