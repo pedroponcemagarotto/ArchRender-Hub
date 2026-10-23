@@ -137,3 +137,14 @@ Antes de continuar, ler:
 O roteador offline conta com `python tools/metodo_integrado.py sources` e `sources --category interiores`. **Ele só lê o manifesto, não baixa imagens.**
 
 **Obrigatório:** sempre apontar a origem, a licença, o autor, o status real (selecionado/baixado/editado/revisado) e não confundir licença de banco de imagem com domínio público. Jamais fingir que uma foto da busca web já chegou ao gerador nativo de imagens. Caso a edição não possa usar uma fonte web diretamente, informar a limitação e escolher via outro fluxo real.
+
+
+## Correção de validade — fonte obrigatória e benchmark R3-04
+
+No diagnóstico de 23/10/2026, imagens de cozinha geradas pela IA apareceram **como text-to-image** (`edit_op=null`, `parent_gen_id=null`), **não como edições vinculadas à imagem original**. As saídas trocaram mobiliário, aberturas, câmera e layout. Um infográfico de pontuações gerado por IA continha notas sem medição e é **INVÁLIDO** para qualquer decisão. Relatório verificado: `research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md`.
+
+As fontes originais privadas (cozinha/sala e lavanderia, ambas 1536 × 864 px) foram encontradas no ambiente de trabalho da conversa que produziu o relatório, mas **não** devem ser presumidas montadas em outro chat. Se não estiverem acessíveis, confirmar antes de rodar imagens.
+
+O novo `tools/metodo_integrado.py bind` registra hashes dos arquivos originais e gerados com status de vínculo de fonte; `assess` agora recusa candidato sem referência comprovada. `tools/refino_fotometrico.py` oferece alternativa de correção de luz/cor sem geração IA, foi utilizada em dois exemplos reais sem sobrescrever originais (os binários NÃO estão no GitHub). Não confundir controle fotométrico com benchmark A/B/C; **0/6** imagens válidas ainda.
+
+Próximo trabalho com segurança: executar suíte atualizada no checkout real; estabelecer edição **imagem-para-imagem** com fonte verdadeiramente transmitida e metadados; depois A/B/C. Fontes públicas Blender/Pexels seguem opcionais, com direitos e links registrados.
