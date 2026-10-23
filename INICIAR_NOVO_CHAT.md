@@ -89,3 +89,10 @@ Leia também:
 **Prioridade:** o ChatGPT gera as imagens e conduz os refinamentos, em vez de apenas fornecer prompts. O método de maior qualidade exige preservar a fonte geométrica, especificar materiais/luz/câmera e conferir o resultado. Plantas técnicas precisam usar a geometria vetorial autorizada; renders bonitos com portas ou paredes deslocadas são reprovados. Alguns mecanismos pesquisados (ControlNet/seed/denoise) pertencem a outras ferramentas e não devem ser apresentados como controles disponíveis no gerador nativo do ChatGPT.
 
 A PR #1 segue em revisão. Sem Incubadora, sem GitHub Actions, sem dados privados no GitHub público. Nenhum benchmark ou vídeo generativo foi executado neste trabalho de documentação.
+
+
+## Repositórios GitHub avaliados (23/10/2026)
+
+Além do Prompt System R2, consulte a [comparação de projetos GitHub e decisão de adoção](research/PROJETOS_GITHUB_UTEIS_2026-10-23.md). O levantamento distingue soluções aplicáveis como **metodologia textual agora** e ferramentas que exigem GPU, Docker, API paga ou automação de navegador.
+
+**Prioridade para novos chats:** aproveitar primeiro os princípios de preservação e QA do ARCHI Rendering Studio e a seleção de receitas do GPT Image Design Prompts. **Não instalar** automaticamente ferramentas de terceiros e não conceder acesso a uma sessão autenticada do navegador sem autorização e revisão de segurança. Continuar produzindo imagens no ChatGPT com os recursos disponíveis. As amostras do usuário são privadas e não devem ser publicadas no GitHub público.
