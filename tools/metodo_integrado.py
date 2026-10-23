@@ -292,8 +292,18 @@ def list_public_sources() -> list:
             raise ValueError("Catalogo: licenca ausente ou nao aprovada para este lote.")
         if not item.get("author"):
             raise ValueError("Catalogo: atribuir autoria.")
-        if item.get("acquired") is not False or item.get("benchmark_status") != "nao_executado":
-            raise ValueError("Catalogo: status deste lote mudou; verificar evidencias.")
+        acquired = item.get("acquired")
+        benchmark_status = item.get("benchmark_status")
+        if not isinstance(acquired, bool):
+            raise ValueError("Catalogo: acquired precisa ser booleano.")
+        if benchmark_status not in ("nao_executado", "em_andamento", "executado", "reprovado", "homologado"):
+            raise ValueError("Catalogo: status de benchmark invalido.")
+        if acquired and not item.get("acquisition_evidence"):
+            raise ValueError("Catalogo: imagem marcada como baixada sem evidencia de aquisicao.")
+        if benchmark_status != "nao_executado" and (
+            not acquired or not item.get("benchmark_evidence")
+        ):
+            raise ValueError("Catalogo: benchmark marcado como executado sem evidencia.")
     return assets
 
 
@@ -306,11 +316,14 @@ def sources_command(args) -> None:
         print(json.dumps({"as_of": "2026-10-23", "assets": sources},
                          ensure_ascii=False, indent=2))
     else:
-        print("Fontes PUBLICAS CANDIDATAS (nao baixadas, nao testadas):")
+        print("Fontes PUBLICAS CURADAS (ver status de cada fonte):")
         for source in sources:
             print("{} | {:11s} | {:15s} | {}".format(
                 source["id"], source.get("category", ""),
                 source["license"], source["title"]))
+            print("  Download: {} | Benchmark: {}".format(
+                "sim" if source["acquired"] else "nao",
+                source["benchmark_status"]))
             print("  Fonte: {}".format(source["source_url"]))
     if not sources:
         print("Nenhuma fonte nessa categoria.")
