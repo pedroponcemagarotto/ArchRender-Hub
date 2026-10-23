@@ -1,0 +1,16 @@
+ARCHRENDER HUB V0.1.0 — INICIAR NO WINDOWS
+
+1. Extraia o ZIP em D:\Projetos\ArchRender-Hub (ou em outra pasta sua).
+2. Instale Python 3.9 ou superior se ainda não estiver instalado.
+3. Clique duas vezes em INICIAR_WINDOWS.bat.
+4. A plataforma abrirá em http://127.0.0.1:8765
+5. Mantenha a janela de terminal aberta durante o uso.
+6. Faça backups regularmente em Backup e dados > Baixar backup.
+
+IMPORTANTE
+- Não precisa de Docker, GPU ou chave de IA.
+- Os prompts de exemplo não geram imagens automaticamente.
+- Os arquivos de receitas e imagens ficam na pasta data, fora do Git.
+- Não exponha a porta do servidor diretamente à internet.
+
+Documentação completa: README.md.

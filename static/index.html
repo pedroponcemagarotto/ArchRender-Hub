@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="description" content="ArchRender Hub: biblioteca privada de prompts e receitas para arquitetura e renderização.">
+  <title>ArchRender Hub · Biblioteca de prompts para arquitetura</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <a href="#inicio" class="brand" id="brandLink" aria-label="ArchRender Hub, ir ao início">
+        <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-words"><strong>archrender<span>.</span></strong><small>HUB / ESTÚDIO</small></span>
+      </a>
+      <div class="sidebar-section-label">ESPAÇO DE TRABALHO</div>
+      <nav class="primary-nav" aria-label="Navegação">
+        <button class="nav-item active" type="button" data-nav="inicio" aria-current="page"><span class="nav-icon" data-icon="house"></span>Visão geral</button>
+        <button class="nav-item" type="button" data-nav="biblioteca"><span class="nav-icon" data-icon="grid"></span>Biblioteca <span class="nav-count" id="navCount">—</span></button>
+        <button class="nav-item" type="button" data-nav="criador"><span class="nav-icon" data-icon="sparkles"></span>Criador de prompts</button>
+        <button class="nav-item" type="button" data-nav="backup"><span class="nav-icon" data-icon="archive"></span>Backup e dados</button>
+      </nav>
+      <div class="sidebar-section-label spaced">EXPLORAR CATEGORIAS</div>
+      <nav id="sidebarCategories" class="category-nav" aria-label="Categorias de prompts"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-help-icon"><span data-icon="shield"></span></div>
+        <div><strong>100% no seu computador</strong><small>Sem assinatura ou envio à nuvem.</small></div>
+      </div>
+      <div class="sidebar-version">ARCHRENDER HUB <span id="sidebarVersion">V0.1</span></div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="menuButton" aria-label="Abrir menu" type="button"><span data-icon="menu"></span></button>
+          <span class="breadcrumb">WORKSPACE</span><span class="slash">/</span><span id="currentSection">Visão geral</span>
+        </div>
+        <div class="topbar-right">
+          <span class="offline-indicator"><span class="status-dot"></span> Ambiente local</span>
+          <button class="button button-main button-sm" type="button" id="topNewRecipe"><span data-icon="plus"></span> Nova receita</button>
+        </div>
+      </header>
+      <main class="main" id="mainContent">
+
+        <section class="view" id="view-inicio" aria-label="Visão geral">
+          <div class="welcome-line"><span class="eyebrow-dot"></span> SEU ACERVO DE CRIAÇÃO VISUAL <span class="eyebrow-rule"></span> VERSÃO 0.1</div>
+          <section class="hero">
+            <div class="hero-copy">
+              <div class="hero-overline"><span data-icon="sparkles"></span> ARQUITETURA + INTELIGÊNCIA ARTIFICIAL</div>
+              <h1>Da inspiração<br>à <em>imagem perfeita.</em></h1>
+              <p>Prompts, referências e técnicas de visualização — organizados para você criar com consistência e preservar suas ideias.</p>
+              <div class="hero-actions">
+                <button type="button" class="button button-cream" data-nav="biblioteca">Explorar biblioteca <span data-icon="arrow-up-right"></span></button>
+                <button type="button" class="button button-hero-outline" data-nav="criador"><span data-icon="sparkles"></span> Criar um prompt</button>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <svg viewBox="0 0 430 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M48 268V127L204 49L366 120V261" stroke="#bac8ad" stroke-opacity=".52" stroke-width="1.5"/>
+                <path d="M204 49v157l162 55M204 206 48 268M204 206l162-86M48 127l155 79" stroke="#a9b6a6" stroke-opacity=".58" stroke-width="1"/>
+                <path d="M90 247v-94l103-50v103l-103 41Z" fill="#e9e9d8" fill-opacity=".14" stroke="#f9f2da" stroke-opacity=".6"/>
+                <path d="m204 206 115-60v89l-115 50v-79Z" fill="#c0cbb9" fill-opacity=".1" stroke="#c5d3c4" stroke-opacity=".6"/>
+                <path d="M114 224v-52l48-22v49l-48 25Zm118 4v-23l64-33v25l-64 31Z" fill="#d2b191" fill-opacity=".52"/>
+                <path d="M83 139 204 80l125 50M83 158l120-61 126 51M83 177l120-60M83 198l120-62" stroke="#e6ebd7" stroke-opacity=".22"/>
+                <path d="m318 146 49-26v141l-49-17V146Z" fill="#e6e5cf" fill-opacity=".13" stroke="#d7e1cb" stroke-opacity=".6"/>
+                <path d="M48 268h319M204 286v-89" stroke="#c8d0b9" stroke-opacity=".18" stroke-dasharray="3 6"/>
+                <circle cx="369" cy="60" r="27" stroke="#d2b191" stroke-opacity=".6"/>
+                <circle cx="369" cy="60" r="18" stroke="#d2b191" stroke-opacity=".45"/>
+                <path d="M346 86h44M369 37v47" stroke="#d2b191" stroke-opacity=".4"/>
+                <path d="M9 274h28M19 261v25M387 267h28M400 254v25" stroke="#e6ead8" stroke-opacity=".6"/>
+              </svg>
+              <span class="hero-art-caption">IDEIAS QUE SE TORNAM ESPAÇOS</span>
+            </div>
+          </section>
+          <div class="stats-grid" id="statsGrid">
+            <div class="stat-card"><span class="stat-icon" data-icon="layers"></span><span class="stat-number">—</span><span class="stat-label">Receitas cadastradas</span></div>
+            <div class="stat-card"><span class="stat-icon" data-icon="bookmark"></span><span class="stat-number">—</span><span class="stat-label">Favoritos</span></div>
+            <div class="stat-card"><span class="stat-icon" data-icon="layout"></span><span class="stat-number">—</span><span class="stat-label">Categorias</span></div>
+            <div class="stat-card"><span class="stat-icon" data-icon="image"></span><span class="stat-number">—</span><span class="stat-label">Com imagens</span></div>
+          </div>
+          <section class="section-block">
+            <div class="section-head"><div><div class="overline">CURADORIA DO ESTÚDIO</div><h2>Comece por uma boa receita<span class="dot-accent">.</span></h2><p>Escolha um exemplo para visualizar, copiar e adaptar ao seu projeto.</p></div><button type="button" class="text-link" data-nav="biblioteca">Ver todas <span data-icon="arrow-right"></span></button></div>
+            <div class="recipe-grid" id="featuredGrid"></div>
+          </section>
+          <section class="bottom-feature"><span class="feature-icon" data-icon="wand"></span><div><strong>Seu projeto merece fidelidade.</strong><span>Registre o que deve permanecer intacto antes de gerar ou editar qualquer imagem.</span></div><button class="button button-secondary" data-nav="criador" type="button">Montar prompt <span data-icon="arrow-right"></span></button></section>
+        </section>
+
+        <section class="view" id="view-biblioteca" hidden aria-label="Biblioteca de prompts">
+          <div class="page-title-row"><div><div class="overline">ORGANIZE SUA INSPIRAÇÃO</div><h1 class="page-title">Biblioteca <span class="dot-accent">/</span> Prompts</h1><p class="page-intro">Encontre, compare e adapte suas melhores receitas de visualização arquitetônica.</p></div><button class="button button-main" id="libraryNewRecipe" type="button"><span data-icon="plus"></span> Adicionar receita</button></div>
+          <div class="filter-surface">
+            <label class="search-field"><span data-icon="search"></span><input type="search" id="searchInput" placeholder="Busque por materiais, categoria, técnicas ou texto do prompt..." autocomplete="off" aria-label="Buscar receitas"></label>
+            <div class="filter-row">
+              <label class="select-wrap"><span class="sr-only">Filtrar categoria</span><select id="categoryFilter"><option value="">Todas as categorias</option></select><span data-icon="chevron-down"></span></label>
+              <label class="select-wrap"><span class="sr-only">Filtrar ferramenta</span><select id="toolFilter"><option value="">Todas as ferramentas</option></select><span data-icon="chevron-down"></span></label>
+              <button type="button" class="filter-pill" id="favoritesFilter" aria-pressed="false"><span data-icon="bookmark"></span> Favoritos</button>
+              <label class="select-wrap sort-wrap"><span class="sr-only">Ordenação</span><select id="sortFilter"><option value="updated">Mais recentes</option><option value="title">Título (A-Z)</option><option value="favorite">Favoritos primeiro</option></select><span data-icon="chevron-down"></span></label>
+            </div>
+          </div>
+          <div class="results-line"><span id="resultsCount">Carregando receitas...</span><button type="button" class="reset-filters" id="clearFilters" hidden>Limpar filtros <span data-icon="x"></span></button></div>
+          <div class="recipe-grid library-grid" id="libraryGrid"></div>
+          <div class="empty-state" id="emptyState" hidden><span data-icon="search-x"></span><h2>Nenhuma receita encontrada</h2><p>Tente ajustar sua pesquisa ou crie sua própria receita de renderização.</p><button class="button button-main" type="button" id="emptyNewRecipe">Criar receita</button></div>
+        </section>
+
+        <section class="view" id="view-criador" hidden aria-label="Criador de prompts">
+          <div class="page-title-row"><div><div class="overline">ASSISTENTE DE COMPOSIÇÃO</div><h1 class="page-title">Criador de prompts<span class="dot-accent">.</span></h1><p class="page-intro">Descreva seu objetivo. O estúdio organiza as instruções em uma receita que você pode copiar ou salvar.</p></div></div>
+          <div class="composer-layout">
+            <form class="composer-form panel" id="composerForm">
+              <div class="panel-heading"><span class="step-chip">01</span><div><h2>Contexto do projeto</h2><p>Comece informando qual é a imagem ou conceito de entrada.</p></div></div>
+              <div class="form-grid">
+                <label class="field"><span>Tipo de entrada</span><select name="input_type" id="composerInput"><option>Modelo 3D / captura do SketchUp</option><option>Fotografia de um imóvel</option><option>Render existente</option><option>Planta baixa</option><option>Croqui ou esboço</option><option>Descrição textual (do zero)</option></select></label>
+                <label class="field"><span>Tipo de projeto</span><select name="project_type" id="composerProject"><option>Fachada residencial</option><option>Interior residencial</option><option>Interior comercial</option><option>Paisagismo</option><option>Implantação</option><option>Reforma de fachada</option><option>Planta humanizada</option><option>Outro ambiente</option></select></label>
+              </div>
+              <div class="panel-divider"></div>
+              <div class="panel-heading"><span class="step-chip">02</span><div><h2>Direção visual</h2><p>Especifique materiais e o tipo de apresentação desejada.</p></div></div>
+              <div class="form-grid"><label class="field"><span>Estilo / linguagem</span><input name="style" placeholder="Ex.: contemporâneo brasileiro" value="Contemporâneo, natural e sóbrio"></label><label class="field"><span>Iluminação</span><select name="lighting"><option>Luz natural difusa, durante o dia</option><option>Manhã com luz lateral suave</option><option>Entardecer (blue hour)</option><option>Iluminação interna aconchegante</option><option>Manter a iluminação original</option></select></label></div>
+              <label class="field"><span>Materiais e acabamentos</span><textarea name="materials" rows="3" placeholder="Ex.: pedra bege na fachada, madeira nos painéis, pintura fosca clara nas paredes"></textarea></label>
+              <div class="panel-divider"></div>
+              <div class="panel-heading"><span class="step-chip">03</span><div><h2>Controle de fidelidade</h2><p>Separe o que deve ser preservado do que pode ser modificado.</p></div></div>
+              <label class="field"><span>Elementos que devem permanecer</span><textarea name="preserve" rows="3">Geometria, aberturas, cobertura, proporções e posição da câmera.</textarea><small>Importante quando existe foto, planta ou modelo aprovado.</small></label>
+              <label class="field"><span>Alterações autorizadas</span><textarea name="changes" rows="3">Materiais, iluminação, texturas e pós-produção visual.</textarea></label>
+              <label class="field"><span>Objetivo e observações</span><textarea name="goal" rows="3" placeholder="Ex.: produzir imagem para apresentação ao cliente, manter o entorno e não adicionar pessoas."></textarea></label>
+              <div class="composer-actions"><button type="reset" class="button button-plain" id="composerReset">Limpar campos</button><button type="button" class="button button-main" id="generatePrompt"><span data-icon="sparkles"></span> Montar prompt</button></div>
+            </form>
+            <aside class="composer-output panel" aria-label="Resultado do criador">
+              <div class="output-header"><span class="mini-label"><span data-icon="check-circle"></span> PROMPT ESTRUTURADO</span><span class="output-badge">PT-BR</span></div>
+              <h2>Sua receita, pronta para usar.</h2><p>Você controla as intenções; a geração transforma as escolhas em instruções organizadas.</p>
+              <div class="prompt-preview" id="promptPreview" tabindex="0" aria-label="Prompt resultante">Preencha os campos à esquerda para montar uma receita de visualização.</div>
+              <div class="output-footer"><button class="button button-secondary" type="button" id="copyComposer"><span data-icon="copy"></span> Copiar prompt</button><button class="button button-main" type="button" id="saveComposer"><span data-icon="bookmark-plus"></span> Salvar receita</button></div>
+              <div class="output-hint"><span data-icon="info"></span><span>Este criador estrutura textos localmente. Ele não chama IA nem envia suas imagens para servidores externos.</span></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-backup" hidden aria-label="Backup e dados">
+          <div class="page-title-row"><div><div class="overline">CONTROLE DO SEU ACERVO</div><h1 class="page-title">Backup e dados<span class="dot-accent">.</span></h1><p class="page-intro">Sua biblioteca é privada e fica armazenada neste computador. Mantenha cópias de segurança.</p></div></div>
+          <div class="backup-grid">
+            <article class="backup-card panel"><div class="backup-icon" data-icon="download"></div><h2>Exportar biblioteca</h2><p>Baixe um arquivo de backup com receitas, campos, imagens anexadas e favoritos. Guarde-o em outro disco.</p><button class="button button-main" type="button" id="exportBackup"><span data-icon="download"></span> Baixar backup</button></article>
+            <article class="backup-card panel"><div class="backup-icon green" data-icon="upload"></div><h2>Restaurar backup</h2><p>Importe um backup criado pelo ArchRender Hub. Receitas com os mesmos identificadores serão substituídas.</p><label class="button button-secondary upload-backup"><span data-icon="upload"></span> Escolher arquivo<input type="file" id="importBackup" accept="application/json,.json" hidden></label></article>
+          </div>
+          <div class="privacy-panel"><span data-icon="shield-check"></span><div><strong>Dados protegidos por padrão</strong><p>O servidor responde somente no endereço <code>127.0.0.1</code>. Seus arquivos permanecem na pasta <code>data</code> ou na pasta indicada por <code>ARCHRENDER_DATA_DIR</code>. Nenhuma imagem é enviada automaticamente à nuvem.</p></div></div>
+          <div class="fine-print"><strong>Aviso da versão inicial</strong><p>O backup JSON comporta até 90 MB de imagens e a restauração é limitada a 120 MB por arquivo. Para uma biblioteca maior, copie a pasta <code>data</code> com o servidor desligado; a restauração de grandes coleções será ampliada numa próxima versão.</p></div>
+        </section>
+
+      </main>
+      <footer class="site-footer"><span>© 2026 ArchRender Hub · Seu estúdio de prompts</span><span>Feito para criar com <strong>controle</strong>.</span></footer>
+    </div>
+  </div>
+
+  <dialog class="modal modal-editor" id="recipeDialog" aria-labelledby="editorTitle">
+    <form id="recipeForm" class="dialog-body" novalidate>
+      <div class="dialog-top"><div><span class="overline">CATÁLOGO PESSOAL</span><h2 id="editorTitle">Nova receita</h2><p>Salve um prompt que você poderá reutilizar e aprimorar.</p></div><button class="icon-button" type="button" data-close="recipeDialog" aria-label="Fechar"><span data-icon="x"></span></button></div>
+      <div class="form-grid"><label class="field"><span>Título <b>*</b></span><input type="text" name="title" maxlength="600" required placeholder="Ex.: Fachada contemporânea diurna"></label><label class="field"><span>Categoria</span><select name="category" id="editorCategory"></select></label></div>
+      <label class="field"><span>Descrição curta</span><input type="text" name="summary" maxlength="600" placeholder="Descreva quando e por que usar esta receita"></label>
+      <div class="form-grid"><label class="field"><span>Ferramenta</span><select name="tool" id="editorTool"></select></label><label class="field"><span>Tipo de entrada</span><input type="text" name="input_type" placeholder="Ex.: fotografia / captura SketchUp"></label></div>
+      <label class="field"><span>Prompt principal <b>*</b></span><textarea name="prompt" maxlength="12000" rows="7" required placeholder="Descreva a tarefa, materiais, elementos fixos e resultado desejado..."></textarea></label>
+      <div class="form-grid"><label class="field"><span>Imagem base / antes</span><input id="beforeFile" type="file" name="before_file" accept="image/png,image/jpeg,image/webp"><small>PNG, JPEG ou WebP · máx. 8 MB</small><div class="image-preview" id="beforePreview">Sem imagem</div><button type="button" class="small-text-button" data-remove-image="before_image">Remover imagem</button></label><label class="field"><span>Imagem gerada / depois</span><input id="afterFile" type="file" name="after_file" accept="image/png,image/jpeg,image/webp"><small>PNG, JPEG ou WebP · máx. 8 MB</small><div class="image-preview" id="afterPreview">Sem imagem</div><button type="button" class="small-text-button" data-remove-image="after_image">Remover imagem</button></label></div>
+      <details class="advanced-fields"><summary>Detalhes adicionais <span data-icon="chevron-down"></span></summary><div class="advanced-body"><div class="form-grid"><label class="field"><span>Estilo</span><input name="style" placeholder="Ex.: contemporâneo"></label><label class="field"><span>Iluminação</span><input name="lighting" placeholder="Ex.: luz difusa"></label></div><div class="form-grid"><label class="field"><span>Câmera</span><input name="camera" placeholder="Ex.: vista ao nível dos olhos"></label><label class="field"><span>Materiais</span><input name="materials" placeholder="Ex.: concreto, madeira, pedra"></label></div><label class="field"><span>Preservar</span><textarea name="preserve" rows="2" placeholder="Elementos que não podem ser alterados"></textarea></label><label class="field"><span>Alterações permitidas</span><textarea name="changes" rows="2"></textarea></label><label class="field"><span>Prompt negativo (quando aplicável)</span><textarea name="negative_prompt" rows="2" placeholder="Depende do modelo de IA utilizado"></textarea></label><label class="field"><span>Etiquetas (separadas por vírgula)</span><input name="tags" placeholder="fachada, materiais, luz natural"></label><label class="field"><span>Anotações</span><textarea name="notes" rows="2" placeholder="Dicas, limitações, versão testada, resultados..."></textarea></label></div></details>
+      <div class="dialog-actions"><button type="button" class="button button-plain" data-close="recipeDialog">Cancelar</button><button type="submit" class="button button-main" id="saveRecipeButton"><span data-icon="check"></span> Salvar receita</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal modal-detail" id="detailDialog" aria-labelledby="detailTitle">
+    <div class="detail-top"><span class="overline">FICHA DE RECEITA</span><button class="icon-button" type="button" data-close="detailDialog" aria-label="Fechar"><span data-icon="x"></span></button></div>
+    <div id="detailContent"></div>
+  </dialog>
+  <div class="toast-area" aria-live="polite" aria-atomic="true" id="toastArea"></div>
+</body>
+</html>
