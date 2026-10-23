@@ -56,3 +56,19 @@ O repositório é público. **Não enviar** plantas de clientes, nomes, endereç
 ## Critério de qualidade
 
 Não existem palavras mágicas nem um prompt universal. O melhor prompt é o que produz a entrega correta, com menor desvio do projeto e menor retrabalho, em uma configuração verificável. Consulte [validação](templates/VALIDACAO.md).
+
+## Pesquisa aprofundada — método R2 (23/10/2026)
+
+**A pesquisa de fóruns e profissionais tornou necessária uma correção:** o Prompt System V1 é apenas um conjunto de receitas **não testadas**. Para buscar qualidade próxima à fotografia e render profissional, precisamos controlar estrutura, materialidade, iluminação, câmera, edição localizada e qualidade final. Texto sozinho não garante fidelidade arquitetônica.
+
+Ordem de leitura **obrigatória para testes novos**:
+
+1. [Pesquisa detalhada em fóruns e fontes técnicas](research/PESQUISA_FORUNS_E_FONTES_2026-10-23.md) — evidências, exemplos e limites.
+2. [Método de produção com ChatGPT R2](research/METODO_RENDERS_CHATGPT_R2.md) — escolher modo, travar geometria, gerar e validar.
+3. [Prompts R2 adaptados ao ChatGPT](research/PROMPTS_CHATGPT_R2.md) — famílias de plantas, fachadas, interiores, alterações locais e vídeo.
+4. [Benchmark visual R1](research/BENCHMARK_VISUAL_R1.md) — comparar 18 saídas de A/B/C, ainda **não executado**.
+5. [Fontes verificadas em JSON](research/FONTES_VERIFICADAS_2026-10-23.json) — referências públicas com classificação.
+
+**Regras inegociáveis:** não declarar um teste que não aconteceu; não confundir imagem fotorrealista com precisão CAD/BIM; não prometer vídeo generativo sem ferramenta conectada; não publicar dados de clientes no GitHub público. O ChatGPT **gera as imagens** com os recursos disponíveis e conduz a avaliação, não delega ao usuário a engenharia dos prompts.
+
+A Incubadora Remote V2 e GitHub Actions continuam fora deste projeto neste momento. Nenhum módulo da aplicação local V0.1 foi reprogramado neste documento.

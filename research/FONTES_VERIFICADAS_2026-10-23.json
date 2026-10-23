@@ -1,0 +1,175 @@
+{
+  "schema": "1.0",
+  "as_of": "2026-10-23",
+  "review": "referencias_publicas_checadas_sem_benchmark_local",
+  "summary": {
+    "exa_search_calls": 16,
+    "results_requested_up_to": 160,
+    "forum_primary_sources": 7,
+    "source_strength_not_numeric": "classificar por origem e reprodutibilidade"
+  },
+  "sources": [
+    {
+      "id": "FR-01",
+      "type": "community_primary",
+      "title": "My experience while exploring AI as rendering tool",
+      "url": "https://www.reddit.com/r/archviz/comments/1slp022/my_experience_while_exploring_ai_as_rendering_tool/",
+      "published": "2026-04-14",
+      "finding": "vistas multiplas e revisoes com drift; atmosfera e textura fortes",
+      "quality": "relato de praticante com ressalvas, sem experimento cego"
+    },
+    {
+      "id": "FR-02",
+      "type": "community_primary",
+      "title": "ConfyUI in architectural visualization",
+      "url": "https://www.reddit.com/r/comfyui/comments/1u13ayk/confyui_in_architectural_visualization/",
+      "published": "2026-06-09",
+      "finding": "wireframe/3D -> ControlNet -> inpainting -> upscale",
+      "quality": "demonstração de oficina com especialistas, sem benchmark publicado"
+    },
+    {
+      "id": "FR-03",
+      "type": "community_primary",
+      "title": "Sketchup + AI Rendering Workflow with Image Upscaling",
+      "url": "https://www.reddit.com/r/comfyui/comments/1vm9ymj/sketchup_ai_rendering_workflow_with_image/",
+      "published": "2026-08-12",
+      "finding": "Lineart+Depth e upscale conservador",
+      "quality": "parametros anedoticos e especificos do workflow"
+    },
+    {
+      "id": "FR-04",
+      "type": "community_primary",
+      "title": "SKETCHUP + AI",
+      "url": "https://www.reddit.com/r/Sketchup/comments/1wf7yk1/sketchup_ai/",
+      "published": "2026-09-13",
+      "finding": "exemplos de deriva geometrica e recomendacao de conservar render original",
+      "quality": "depoimentos multiplos com possiveis interesses comerciais"
+    },
+    {
+      "id": "FR-05",
+      "type": "community_primary",
+      "title": "GPT Render",
+      "url": "https://www.reddit.com/r/Sketchup/comments/1lfwvbs/gpt_render/",
+      "published": "2025-06-20",
+      "finding": "revisao pequena e multicamera sao casos dificeis",
+      "quality": "reacao profissional verificavel em thread"
+    },
+    {
+      "id": "FR-06",
+      "type": "community_primary",
+      "title": "Using AI to create renders from design sketches",
+      "url": "https://www.reddit.com/r/Homebuilding/comments/1lc40o9/using_ai_to_create_renders_from_design_sketches/",
+      "published": "2025-06-15",
+      "finding": "elevação + materiais + luz com ChatGPT, falhas em janelas e dimensoes",
+      "quality": "teste de usuario com prompt exemplificado; versao antiga"
+    },
+    {
+      "id": "FR-07",
+      "type": "community_primary",
+      "title": "SD + Controlnet for Architecture/Interiors",
+      "url": "https://www.reddit.com/r/StableDiffusion/comments/13w2pyk",
+      "published": "2023-05-30",
+      "finding": "linha Revit + ControlNet, setup custa tempo",
+      "quality": "relato historico de praticante"
+    },
+    {
+      "id": "ST-01",
+      "type": "competition_case",
+      "title": "Generative Interior Design Challenge 2024 - 2nd place solution",
+      "url": "https://medium.com/@melgor89/generative-interior-design-challenge-2024-2nd-place-solution-6338f19f6fe3",
+      "published": "2024-04-17",
+      "finding": "mascara e segmentacao melhoram controle; prompting isolado pouco ajudou",
+      "quality": "metodo de competicao documentado, ainda sujeito a limitações"
+    },
+    {
+      "id": "OF-01",
+      "type": "official",
+      "title": "OpenAI Image prompting guide",
+      "url": "https://developers.openai.com/api/docs/guides/image-prompting",
+      "published": null,
+      "finding": "referencias com papeis, separar mudancas e restricoes, iterar e avaliar",
+      "quality": "documentacao oficial; controles API nao necessariamente acessiveis no ChatGPT"
+    },
+    {
+      "id": "OF-02",
+      "type": "official",
+      "title": "Chaos 7 essential steps realistic rendering",
+      "url": "https://blog.chaos.com/7-essential-steps-to-creating-realistic-renderings",
+      "published": "2026-02-13",
+      "finding": "fotografia, materiais, luz, camera, pos-producao",
+      "quality": "especialista/fornecedor de render; bem fundamentado mas opinativo"
+    },
+    {
+      "id": "OF-03",
+      "type": "official",
+      "title": "Chaos AI architecture prompts",
+      "url": "https://blog.chaos.com/ai-architecture-prompts",
+      "published": "2026-06-26",
+      "finding": "modelo fornece geometria, prompt define lookdev",
+      "quality": "guia oficial fornecedor"
+    },
+    {
+      "id": "OF-04",
+      "type": "official",
+      "title": "ComfyUI ControlNet tutorials",
+      "url": "https://docs.comfy.org/tutorials/controlnet/controlnet",
+      "published": null,
+      "finding": "imagem condicionada por mapas estruturais",
+      "quality": "documentacao do projeto; requer ferramenta externa"
+    },
+    {
+      "id": "OF-05",
+      "type": "official",
+      "title": "ComfyUI Depth",
+      "url": "https://docs.comfy.org/tutorials/controlnet/depth-controlnet",
+      "published": null,
+      "finding": "mapas de profundidade orientam perspectiva",
+      "quality": "documentacao do projeto; controle imperfeito"
+    },
+    {
+      "id": "OF-06",
+      "type": "official",
+      "title": "ComfyUI preprocessing",
+      "url": "https://docs.comfy.org/tutorials/utility/preprocessors",
+      "published": null,
+      "finding": "separacao estrutural de lineart, depth e normals",
+      "quality": "documentacao oficial"
+    },
+    {
+      "id": "OF-07",
+      "type": "official",
+      "title": "Runway Image-to-Video prompting",
+      "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+      "published": null,
+      "finding": "prompt video descreve movimento porque imagem inicial define cena",
+      "quality": "guia fornecedor vídeo; nao implica ferramenta conectada"
+    },
+    {
+      "id": "OS-01",
+      "type": "code_source",
+      "title": "sd-interior-design",
+      "url": "https://github.com/alaradirik/sd-interior-design",
+      "published": null,
+      "finding": "interior com inpainting segmentacao e MLSD",
+      "quality": "codigo aberto inspecionavel, nao executado"
+    },
+    {
+      "id": "OS-02",
+      "type": "code_source",
+      "title": "virtual-staging",
+      "url": "https://github.com/mithunparab/virtual-staging",
+      "published": null,
+      "finding": "Canny+Depth+mascaras para staging",
+      "quality": "codigo aberto inspecionavel, nao executado"
+    },
+    {
+      "id": "OS-03",
+      "type": "code_source",
+      "title": "ScribbleArchitect",
+      "url": "https://github.com/s-du/ScribbleArchitect",
+      "published": null,
+      "finding": "croqui e referencias para arquitetura",
+      "quality": "codigo aberto inspecionavel, nao executado"
+    }
+  ]
+}

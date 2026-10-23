@@ -1,8 +1,8 @@
 # ArchRender Hub — iniciar um teste em um novo chat
 
-**Versão do guia:** 1.0 (2026-10-23)  
+**Versão do guia:** 1.1 (2026-10-23)  
 **Repositório oficial:** https://github.com/pedroponcemagarotto/ArchRender-Hub  
-**Branch de conhecimento atual:** \`feat/prompt-system-v1\`  
+**Branch de conhecimento atual:** `feat/prompt-system-v1`  
 **PR em revisão:** https://github.com/pedroponcemagarotto/ArchRender-Hub/pull/1
 
 > **Importante:** o GitHub é a base versionada de instruções, templates e aprendizados, mas não substitui o envio de imagens do projeto. Um novo chat não está automaticamente conectado ao histórico completo da conversa anterior. Ler o repositório de novo é parte obrigatória da abertura do trabalho.
@@ -23,7 +23,11 @@ Vamos continuar o projeto ArchRender Hub.
 Use como fonte de trabalho o repositório:
 https://github.com/pedroponcemagarotto/ArchRender-Hub
 
-Antes de agir, leia, na branch feat/prompt-system-v1:
+Antes de agir, leia, na branch feat/prompt-system-v1, priorizando a pesquisa R2 e o método atualizado:
+0. research/PESQUISA_FORUNS_E_FONTES_2026-10-23.md
+0. research/METODO_RENDERS_CHATGPT_R2.md
+0. research/PROMPTS_CHATGPT_R2.md
+0. research/BENCHMARK_VISUAL_R1.md
 1. PROMPT_SYSTEM_v1.md
 2. knowledge/OPERACAO_COM_CHATGPT.md
 3. templates/VALIDACAO.md
@@ -45,26 +49,26 @@ Minha tarefa atual: [ESCREVA AQUI: ex. humanizar a planta anexada com piso amade
 
 ## Como testar o método corretamente
 
-**Teste A — planta humanizada:** anexar planta legível; escolher \`knowledge/prompts/01_planta_humanizada.md\`; registrar contorno, paredes, portas, janelas e eventuais elementos inventados. Se a saída alterar geometria, marcar **reprovado** e corrigir a técnica, não apenas a descrição textual.
+**Teste A — planta humanizada:** anexar planta legível; escolher `knowledge/prompts/01_planta_humanizada.md`; registrar contorno, paredes, portas, janelas e eventuais elementos inventados. Se a saída alterar geometria, marcar **reprovado** e corrigir a técnica, não apenas a descrição textual.
 
-**Teste B — fachada 3D:** anexar screenshot/elevação/modelo; usar \`03_fachada_exterior_3d.md\`; comparar pavimentos, janelas, portas, volumes e ângulo de câmera. Materiais e luz podem variar se autorizados.
+**Teste B — fachada 3D:** anexar screenshot/elevação/modelo; usar `03_fachada_exterior_3d.md`; comparar pavimentos, janelas, portas, volumes e ângulo de câmera. Materiais e luz podem variar se autorizados.
 
-**Teste C — interiores:** anexar foto/render/modelo do ambiente; usar \`04_interiores.md\`; verificar posição de aberturas, escala visual e itens fixos.
+**Teste C — interiores:** anexar foto/render/modelo do ambiente; usar `04_interiores.md`; verificar posição de aberturas, escala visual e itens fixos.
 
-**Teste D — vídeo:** começar por uma ou mais vistas aprovadas; usar \`08_video_apresentacao.md\`; montar planos curtos e conferir se a ferramenta disponível realmente gera vídeo, distinguindo animação de fotos de vídeo generativo.
+**Teste D — vídeo:** começar por uma ou mais vistas aprovadas; usar `08_video_apresentacao.md`; montar planos curtos e conferir se a ferramenta disponível realmente gera vídeo, distinguindo animação de fotos de vídeo generativo.
 
 ## Como registrar um aprendizado
 
-- Usar campos de \`templates/REGISTRO_EXEMPLO.json\` (preencher dados reais disponíveis, sem fabricar seed/modelo).
-- Aplicar portões de qualidade de \`templates/VALIDACAO.md\`.
-- Estados válidos: \`candidato_nao_testado\`, \`testado\`, \`aprovado_cliente\`, \`reprovado\`, \`descontinuado\`.
+- Usar campos de `templates/REGISTRO_EXEMPLO.json` (preencher dados reais disponíveis, sem fabricar seed/modelo).
+- Aplicar portões de qualidade de `templates/VALIDACAO.md`.
+- Estados válidos: `candidato_nao_testado`, `testado`, `aprovado_cliente`, `reprovado`, `descontinuado`.
 - O repositório **é público**. Não publicar originais, renders de cliente, localização/endereço, logotipos, documentos confidenciais ou qualquer identificação pessoal. Histórico público só com conteúdos seguros e anonimizados; armazenar mídias privadas fora do GitHub público.
-- Preferir alteração em branch + PR, mantendo \`main\` intacta até revisão.
+- Preferir alteração em branch + PR, mantendo `main` intacta até revisão.
 - Registrar tanto sucessos quanto falhas, incluindo qual detalhe do prompt e/ou técnica resolveu o problema.
 
 ## Convenção para chats posteriores
 
-Enquanto a PR #1 não for incorporada, utilizar explicitamente a branch \`feat/prompt-system-v1\`. Quando incorporada à \`main\`, o novo chat poderá usar \`main\`, mas deve verificar a revisão efetiva antes de agir. Caso a receita seja alterada, consultar a versão mais recente e não reutilizar cegamente comandos antigos.
+Enquanto a PR #1 não for incorporada, utilizar explicitamente a branch `feat/prompt-system-v1`. Quando incorporada à `main`, o novo chat poderá usar `main`, mas deve verificar a revisão efetiva antes de agir. Caso a receita seja alterada, consultar a versão mais recente e não reutilizar cegamente comandos antigos.
 
 ## O que não é garantido
 
@@ -72,3 +76,16 @@ Enquanto a PR #1 não for incorporada, utilizar explicitamente a branch \`feat/p
 - Um prompt textual nunca assegura geometria ou medidas exatas; materiais técnicos exigem conferência com CAD/BIM.
 - A V0.1 do aplicativo local ainda não gera imagens ou vídeos diretamente; o ChatGPT pode gerar imagens no contexto da conversa com as ferramentas disponíveis.
 - Criação de vídeo MP4 depende de acesso a ferramenta de vídeo; ter a receita não equivale a ter esse recurso.
+
+
+## Atualização R2 — como buscar qualidade profissional
+
+Leia também:
+- [Pesquisa de fontes e fóruns (23/10/2026)](research/PESQUISA_FORUNS_E_FONTES_2026-10-23.md)
+- [Método R2 voltado ao ChatGPT](research/METODO_RENDERS_CHATGPT_R2.md)
+- [Prompts originais R2](research/PROMPTS_CHATGPT_R2.md)
+- [Benchmark A/B/C — planejamento](research/BENCHMARK_VISUAL_R1.md)
+
+**Prioridade:** o ChatGPT gera as imagens e conduz os refinamentos, em vez de apenas fornecer prompts. O método de maior qualidade exige preservar a fonte geométrica, especificar materiais/luz/câmera e conferir o resultado. Plantas técnicas precisam usar a geometria vetorial autorizada; renders bonitos com portas ou paredes deslocadas são reprovados. Alguns mecanismos pesquisados (ControlNet/seed/denoise) pertencem a outras ferramentas e não devem ser apresentados como controles disponíveis no gerador nativo do ChatGPT.
+
+A PR #1 segue em revisão. Sem Incubadora, sem GitHub Actions, sem dados privados no GitHub público. Nenhum benchmark ou vídeo generativo foi executado neste trabalho de documentação.
