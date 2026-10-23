@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from typing import Optional
 
 RESOLUTIONS = {
     "preview": (640, 360),
@@ -25,7 +26,7 @@ SUPPORTED_AUDIO = {".mp3", ".m4a", ".wav", ".ogg", ".flac"}
 MOTIONS = ("auto", "zoom-in", "zoom-out", "pan-left", "pan-right", "still")
 
 
-def find_ffmpeg(explicit: str | None) -> str:
+def find_ffmpeg(explicit: Optional[str]) -> str:
     """Allow user-selected ffmpeg.exe; never download or execute a shell string."""
     if explicit:
         candidate = Path(explicit).expanduser()
@@ -225,7 +226,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[list[str]] = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         render(args)
