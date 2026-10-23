@@ -41,3 +41,12 @@ Meta interna inicial: 90/100 **e** nenhum portão crítico falho para candidato 
 ID | data | tipo | modo | versão do prompt | modelo real | referência privada | parâmetros conhecidos | status | escore | falha | correção | aprovação.
 
 Se a ferramenta/modelo não expõe parâmetro ou seed, escrever 'não disponível' — jamais inventar valores.
+
+## Verificações adicionais: vídeo local gratuito
+
+- [ ] Registrar ferramenta real (\`FFmpeg\` e edição \`Shotcut\`, se utilizada); não rotular como \`AI image-to-video\`.
+- [ ] Conferir se os movimentos são **apenas** zoom/pan em imagens aprovadas; nenhum cômodo, janela ou móvel é inventado.
+- [ ] Conferir arquivo MP4 H.264 reproduzível, resolução real, FPS e duração; não declarar 4K nativo após upscale.
+- [ ] Verificar áudio, procedência/licença da trilha e eventual falta de som.
+- [ ] Verificar que arquivos de clientes não foram incluídos em commit ou issue públicos.
+- [ ] Validar capacidade real do PC antes de sugerir DepthFlow, geração 3D ou modelos IA locais.
