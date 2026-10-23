@@ -114,27 +114,24 @@ def assemble_filter(count: int, seconds: float, fade: float, transition: str) ->
     """Return FFmpeg filtergraph and output label for a sequence of clips."""
     if count < 2:
         raise ValueError("assemble_filter requires 2 or more clips.")
-    filters = [
-        f"[{i}:v]fps=24,settb=AVTB,setpts=PTS-STARTPTS,format=yuv420p[v{i}]"
-        for i in range(count)
-    ]
+    # Each shot was rendered at precisely the same FPS, dimensions and timebase.
+    # Applying additional setpts/fps/settb filters here can erase the constant
+    # framerate metadata and make FFmpeg's xfade reject otherwise valid clips.
     if transition == "cut":
-        filters.append(
-            "".join(f"[v{i}]" for i in range(count))
-            + f"concat=n={count}:v=1:a=0[vout]"
-        )
-        return ";".join(filters), "[vout]"
+        chain = "".join(f"[{i}:v]" for i in range(count))
+        return chain + f"concat=n={count}:v=1:a=0[vout]", "[vout]"
 
-    previous = "v0"
+    parts: list[str] = []
+    previous = "[0:v]"
     for i in range(1, count):
-        name = f"x{i}"
+        name = f"[x{i}]"
         offset = i * (seconds - fade)
-        filters.append(
-            f"[{previous}][v{i}]xfade=transition=fade:"
-            f"duration={fade:.3f}:offset={offset:.3f}[{name}]"
+        parts.append(
+            f"{previous}[{i}:v]xfade=transition=fade:"
+            f"duration={fade:.3f}:offset={offset:.3f}{name}"
         )
         previous = name
-    return ";".join(filters), f"[{previous}]"
+    return ";".join(parts), previous
 
 
 def run_ffmpeg(args: list[str]) -> None:
@@ -192,9 +189,6 @@ def render(args: argparse.Namespace) -> Path:
                 graph, video_map = assemble_filter(
                     len(shots), image_seconds, args.fade, args.transition
                 )
-                # Use explicitly normalized fps (24) only for the 24fps case.
-                if args.fps != 24:
-                    graph = graph.replace("fps=24,", f"fps={args.fps},")
                 cmd += ["-filter_complex", graph]
             cmd += ["-map", video_map]
             if args.audio is not None:
