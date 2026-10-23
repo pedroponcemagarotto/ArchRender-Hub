@@ -72,9 +72,9 @@ Para validar o mecanismo antes de instalar ComfyUI, foi usada a **cozinha origin
 
 Resultado validado numericamente: **418.142 pixels** alterados **dentro** da região autorizada, **zero pixels** alterados **fora** dela, **zero pixels** alterados na máscara protegida; dimensão final **1536 × 864**. Preservados os bytes do arquivo original. Esse resultado só comprova a proteção de pixels, **não o desempenho de modelo de IA ou fidelidade de geometria editada**.
 
-- Testes do R5: **10/10 aprovados** localmente no Python 3.13.5 (Linux).
+- Testes do R5: **12/12 aprovados** localmente no Python 3.13.5 (Linux).
 - Testes de QA R4: **6/6 aprovados** localmente (mesma cópia verificada).
-- Integridade do código: SHA do blob GitHub `ebb3f725e208fd31e102540c5c815fabf5a16ec9`; arquivo de testes `51b892719f0f331f63ded36256e641a64bcf5dab`, ambos confrontados com `git hash-object` do código executado localmente.
+- Integridade do código: SHA do blob GitHub `9bdb6f40b02d0a8e1ca1661ebc1114681dee2db1`; arquivo de testes `15ec72471e1aa2a212f8126126c40242ed12705f`, ambos confrontados com `git hash-object` do código executado localmente.
 - **Não** significa que a suíte completa de todas as ferramentas da PR foi validada no checkout real.
 
 ## 5. Segurança, licenças e escopo
