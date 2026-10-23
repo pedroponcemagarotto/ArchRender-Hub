@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 import re
 import sys
-import unicodedata
+from typing import Optional
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -217,7 +217,7 @@ def save_json_private(doc: dict, destination: Path) -> Path:
     return target
 
 
-def assess(doc: dict, gates: dict, score: int | None) -> dict:
+def assess(doc: dict, gates: dict, score: Optional[int]) -> dict:
     """Record manually reported evidence. Never declare client approval."""
     if not isinstance(doc, dict) or "workflow_id" not in doc or "qa" not in doc:
         raise ValueError("Arquivo nao e um contrato R3.")
