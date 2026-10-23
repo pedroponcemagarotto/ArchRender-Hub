@@ -96,3 +96,12 @@ A PR #1 segue em revisão. Sem Incubadora, sem GitHub Actions, sem dados privado
 Além do Prompt System R2, consulte a [comparação de projetos GitHub e decisão de adoção](research/PROJETOS_GITHUB_UTEIS_2026-10-23.md). O levantamento distingue soluções aplicáveis como **metodologia textual agora** e ferramentas que exigem GPU, Docker, API paga ou automação de navegador.
 
 **Prioridade para novos chats:** aproveitar primeiro os princípios de preservação e QA do ARCHI Rendering Studio e a seleção de receitas do GPT Image Design Prompts. **Não instalar** automaticamente ferramentas de terceiros e não conceder acesso a uma sessão autenticada do navegador sem autorização e revisão de segurança. Continuar produzindo imagens no ChatGPT com os recursos disponíveis. As amostras do usuário são privadas e não devem ser publicadas no GitHub público.
+
+
+## Complemento de vídeos gratuitos / integrações GitHub (23/10/2026)
+
+Antes de começar um trabalho sobre vídeos, leia \`knowledge/VIDEO_GRATUITO_PC.md\`; para escolha de receitas, leia \`knowledge/ROTEADOR_DE_RECEITAS_R1.md\`; para atribuição e aproveitamento criterioso de projetos externos, leia \`knowledge/INTEGRACOES_GITHUB_R1.md\`.
+
+O modo imediato no Windows é **\`INICIAR_VIDEO_WINDOWS.bat\` + FFmpeg instalado localmente**. Cria MP4 com zoom/pan e transição, sem GPU obrigatória, sem API e sem vídeo IA. O ChatGPT continua gerando as imagens iniciais e acompanhando o storyboard; apenas imagens aprovadas alimentam o renderizador gratuito. DepthFlow é opção futura para paralaxe 2.5D e Blender para passeio com geometria 3D real.
+
+Status verificado: ensaio manual de FFmpeg no ambiente de desenvolvimento (vídeo curto 1280x720/24 FPS/7,5 s), **sem implantação no PC Host**. Não enviar imagens privadas ou MP4 a este GitHub público. PR #1 segue Draft; não presumir merged.
