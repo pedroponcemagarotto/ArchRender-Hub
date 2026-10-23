@@ -55,6 +55,18 @@ O pipeline produz arquivos de vídeo intermediários em pasta temporária, com \
 
 A qualidade editorial vem principalmente da **imagem-base**, da fidelidade das vistas e da continuidade entre planos. **Ter RTX 3060 nao melhora sozinho qualidade da fonte ou "transforma 720p em 4K real".** O gerador atual \`tools/video_local.py\` usa libx264 na CPU; a GPU NVENC ainda nao esta integrada nesse script. NVENC acelera codificacao, nao adiciona realismo.
 
+## Perfil de teste: notebook RTX 3060 (6 GB VRAM) + 16 GB RAM
+
+**Dado confirmado pelo usuário em 23/10/2026:** 16 GB de RAM. GPU informada: Dell G15 RTX 3060; a documentação Dell das versões G15 com RTX 3060 informa 6 GB GDDR6, mas verificar VRAM e modelo exatos na máquina antes de instalar.
+
+**Decisão sem gastos:** não recomendar upgrade imediato; a primeira homologação local será FFmpeg (MP4) + DepthFlow (paralaxe) + revisão do vídeo. O script atual de montagem usa codificação H.264 em CPU e permite 720p/1080p; desempenho real no PC não medido.
+
+**FramePack:** o mínimo oficial de 6 GB refere-se à **VRAM**, não a RAM de sistema. Existem relatos específicos no repositório do FramePack de falhas/lentidão com 16 GB RAM, incluindo uso intensivo de pagefile. Portanto, não prometer operação fluida; instalar só depois de verificar >30 GB de downloads de modelos, espaço adicional temporário, SSD preferencial, drivers, pagefile gerenciado pelo Windows, tempo disponível e ausência de conflito com outros projetos. Começar, se autorizado, com no máximo um trecho exploratório curto e observar RAM, disco, GPU e falhas; não alterar a configuração global de memória virtual sem avaliação.
+
+**32 GB RAM:** upgrade opcional somente se os testes reais do FramePack indicarem gargalo; não é necessário para uso inicial do Hub, FFmpeg, DepthFlow ou edição comum.
+
+**Fontes verificadas:** [requisitos oficiais do FramePack](https://github.com/lllyasviel/FramePack#requirements), [relatos sobre RAM 16 GB](https://github.com/lllyasviel/FramePack/issues/62), [falhas ao gerar vídeo](https://github.com/lllyasviel/FramePack/issues/423), [README do DepthFlow](https://github.com/BrokenSource/DepthFlow).
+
 ## Etapas para elevar a qualidade sem pagar
 
 **Nível 1 — imediato e leve:** FFmpeg + ChatGPT gera/avalia as imagens + Shotcut edita o MP4.
