@@ -94,3 +94,19 @@ Além da biblioteca V0.1, esta branch disponibiliza um **gerador independente de
 - [Testes do complemento](tests/test_video_local.py) — verificação local com FFmpeg quando presente; não há GitHub Actions.
 
 **Status:** este complemento entrou como código na PR de desenvolvimento e o fluxo de FFmpeg foi experimentado no ambiente de teste com 2 imagens e um MP4 de 7,5 s/720p. **O PC Host não foi homologado** (conector desconectado na verificação). As imagens e o vídeo de demonstração não foram enviados ao GitHub público. Não confundir o novo gerador com função do banco local V0.1: o inicializador de vídeo é separado.
+
+## Método integrado R3 — imagens arquitetônicas primeiro
+
+O [Roadmap Operacional Integrado R3](ROADMAP_OPERACIONAL_INTEGRADO_R3.md) organiza o aprendizado dos repositórios externos numa sequência auditável: **entrada original → receita apropriada → prompt A/B/C → gate geométrico → comparação visual → registro privado**. A integração atual utiliza **conceitos autorais e arquivos locais**; não instala automaticamente ControlNet, modelos terceiros ou conectores pagos.
+
+O novo roteador **isolado do aplicativo V0.1** está em `tools/metodo_integrado.py` (Python 3.9+, somente biblioteca padrão). Ele lista as nove receitas, prepara contratos de prompts e registra avaliação humana em `data/workflows/`, pasta ignorada pelo Git. **Não** analisa pixels sozinho, não gera imagem, não concede aprovação de cliente e não modifica a base SQLite.
+
+```bash
+python tools/metodo_integrado.py list
+python tools/metodo_integrado.py prepare --task interiores --variant C --reference-id ref-cozinha-001 --preserve "janelas originais" --preserve "geladeira original" --change "melhorar luz"
+python -m unittest discover -s tests -v
+```
+
+O primeiro experimento comparativo está definido em [AR-BENCH-001 (cozinha/sala)](research/testes/AR-BENCH-001_CASO_INTERIORES_R3.md), com **seis gerações A/B/C pendentes** (não confundir com os experimentos exploratórios anteriores). Imagens privadas não entram no repositório.
+
+**Situação:** documentação e ferramenta auxiliar incorporadas à PR Draft; o benchmark R3 não foi executado. Interface local V0.1 permanece inalterada. A homologação no PC Host e o acoplamento do roteador à interface são fases posteriores.
