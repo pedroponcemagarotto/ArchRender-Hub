@@ -156,3 +156,16 @@ A etapa de garantia visual ganhou [relatório R4](research/testes/AR-R4_AUDITORI
 **Testes realmente feitos em container Linux:** R4 6/6 OK; API V0.1 baseline 6/6 OK. Fonte original da cozinha contra refino fotométrico local: recall de borda 99,528%; lavanderia 100%. **Uma geração textual não vinculada** divergiu de resolução e, redimensionada só para triagem, teve recall 26,455% global e 9,695% na área do sofá. Números de contorno não são fidelidade geométrica certificada nem desempenho geral de IA.
 
 **Pendente:** suíte completa do checkout atual da PR, execução no Windows/PC Host (offline) e seis edições IA realmente vinculadas ao original. **R3-04 = 0/6 válido**, sem método A/B/C vencedor. Não publicar imagens nem dados privados. A pesquisa externa de 2026 reforça que SSIM/contornos são diagnósticos, não verificação arquitetônica: links e limites no relatório R4.
+
+
+## K. R5 — proteção por máscara e pipeline integrado (23/10/2026)
+
+O módulo de imagem evoluiu para um pipeline não generativo e reproduzível:
+- [Compositor R5](tools/compor_edicao_mascarada.py): aplica máscara editável e proteção rígida, sem alterar qualquer pixel decodificado fora da permissão, sem sobrescrever original, candidato ou resultado. Testes: **12/12**.
+- [Orquestrador R5](tools/pipeline_img2img_r5.py): prepara o contrato R3, aplica composição, executa QA R4, registra original/resultado e gera JSON privado. Testes: **8/8**.
+- [Manual local Krita/ComfyUI](knowledge/PIPELINE_IMG2IMG_LOCAL_R5.md): descreve futura geração img2img real na RTX 3060, **não instalada/homologada**.
+- [Relatório com evidências](research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md): **52/52 testes** passaram no conjunto de módulos reproduzidos com hashes de código/testes equivalentes à PR, usando fixtures para fontes/receitas. Não é a suíte integral do checkout real.
+
+Piloto real: cozinha original 1536x864 + candidato fotométrico local + máscara de parede + proteção de sofá, **0 alterações fora das máscaras, 0 na área protegida**, total 418.142 pixels alterados só dentro da região permitida; o compositor + QA entregaram relatório privado `client_approved=false` e `benchmark_completed=false`.
+
+**Importante:** Isto prova proteção **da área não autorizada**; não prova que uma IA recebeu a imagem, nem que preservou detalhes **dentro** da máscara. O piloto generativo R3-04 continua **0/6** até existir img2img verdadeiro com documento de referência. PC Host e suíte completa continuam pendentes. Sem Actions/merge/cópias de projetos de clientes ao GitHub.
