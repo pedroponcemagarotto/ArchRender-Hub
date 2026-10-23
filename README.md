@@ -125,3 +125,29 @@ python tools/metodo_integrado.py sources --json
 O comando **só consulta metadados locais**; não acessa a internet, não baixa fotos, não gera render e não substitui os originais particulares do usuário. O GitHub contém links e crédito, **não imagens de terceiros**. As fontes serão usadas em benchmarks públicos **se e quando o gerador receber o arquivo de entrada real**, observadas as condições de licenciamento. Para cada lote relevante, a pesquisa de fóruns e documentos oficiais passa a ser etapa regular.
 
 **Status inicial:** 7 fontes curadas; **0 fontes baixadas, 0 testes públicos R1 executados**, R3-04 cozinha/sala privada ainda 0/6.
+
+
+## Proteção de vínculo da fonte e refino fiel R3
+
+A primeira verificação real com as imagens originais identificou um risco: **gerações por texto podem trocar todo o ambiente, mesmo quando o prompt descreve a referência**. Por isso, a ferramenta R3 agora separa **imagem editada a partir da original** de **texto-para-imagem**. Só pode ser candidata ao QA de fidelidade uma geração registrada com SHA-256 de fonte/saída, evidência de edição da fonte, identificação da ferramenta e **inspeção humana do original**. A marcação de evidência é declarativa e não fornece prova criptográfica de uso da imagem pelo provedor; a inspeção humana continua obrigatória.
+
+```bash
+python tools/metodo_integrado.py prepare --task interiores --reference-id ref-001 --variant C
+# Executar com um contrato gerado acima e com arquivos reais privados:
+python tools/metodo_integrado.py bind --file data/workflows/AR-WF-ID.json --original "caminho/original.png" --result "caminho/resultado.png" --mode image_edit --tool "ChatGPT Images" --source-inspected --binding-evidence "registro do provedor confirmando edicao a partir da fonte"
+python tools/metodo_integrado.py assess --file data/workflows/AR-WF-ID-generation-ID.json --geometry passou --camera passou --materials passou --artifacts passou --score 86
+```
+
+Sem prova de vínculo, mesmo uma nota 100 leva a `nao_elegivel_sem_referencia` (ou `reprovado` se houver falha geométrica real). **Não assuma que a ferramenta nativa vinculou a imagem só porque ela foi mencionada no prompt.**
+
+Para uma alternativa **sem redesenho nem assinatura**, `tools/refino_fotometrico.py` executa ajustes de brilho, contraste, cor, gamma e nitidez ligeira, **sem gerar móveis, janelas ou paredes**; é um complemento, não renderização fotorrealista com física de luz. Depende somente do Pillow opcional, e é uma ferramenta separada do app V0.1:
+
+```bash
+python -m pip install pillow
+python tools/refino_fotometrico.py original.jpg resultado.png --preset interior
+python tools/refino_fotometrico.py lavanderia.jpg resultado.png --preset lavanderia
+```
+
+No primeiro diagnóstico controlado com imagens privadas, duas fontes de 1536 × 864 tiveram saída na mesma resolução. A retenção de contornos com tolerância de 2 pixels foi de aproximadamente 99,6% e 99,9%, respectivamente, para ajustes fotométricos. Isso não equivale a provar que um resultado de IA preserva geometria. O teste visual A/B/C oficial permanece **0/6**. [Relatório de evidências](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md).
+
+Os novos testes da branch precisam ser rodados no checkout exato e no PC Host antes de homologação. Nenhum binário de cliente foi publicado.
