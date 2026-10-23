@@ -20,6 +20,7 @@ from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog" / "prompts.json"
+PUBLIC_SOURCES = ROOT / "catalog" / "fontes_publicas_r1.json"
 TASKS = {
     "planta-humanizada": "AR-PLAN-HUM-001",
     "planta-tecnica": "AR-PLAN-TEC-001",
@@ -262,6 +263,58 @@ def list_command(args) -> None:
             print("  {:22s} {:20s} {}".format(task, rid, items[rid]["title"]))
 
 
+
+def list_public_sources() -> list:
+    """Read curated *links*, never download/copy third-party images."""
+    doc = json.loads(PUBLIC_SOURCES.read_text(encoding="utf-8"))
+    assets = doc.get("assets")
+    if not isinstance(assets, list) or not assets:
+        raise ValueError("Catalogo de fontes publicas ausente ou invalido.")
+    allowed_providers = {"Blender Foundation — Demo Files", "Unsplash", "Pexels"}
+    by_id = set()
+    for item in assets:
+        if not isinstance(item, dict):
+            raise ValueError("Catalogo: fonte invalida.")
+        identifier = item.get("id")
+        if not isinstance(identifier, str) or not re.fullmatch(r"AR-PUB-\d{3}", identifier):
+            raise ValueError("Catalogo: ID de fonte invalido.")
+        if identifier in by_id:
+            raise ValueError("Catalogo: IDs de fontes repetidos.")
+        by_id.add(identifier)
+        url = item.get("source_url", "")
+        license_url = item.get("license_url", "")
+        if not (isinstance(url, str) and url.startswith("https://") and
+                isinstance(license_url, str) and license_url.startswith("https://")):
+            raise ValueError("Catalogo: fonte sem URL segura/licenca.")
+        if item.get("provider") not in allowed_providers:
+            raise ValueError("Catalogo: provedor desconhecido.")
+        if item.get("license") not in ("CC0", "CC BY", "Unsplash License", "Pexels License"):
+            raise ValueError("Catalogo: licenca ausente ou nao aprovada para este lote.")
+        if not item.get("author"):
+            raise ValueError("Catalogo: atribuir autoria.")
+        if item.get("acquired") is not False or item.get("benchmark_status") != "nao_executado":
+            raise ValueError("Catalogo: status deste lote mudou; verificar evidencias.")
+    return assets
+
+
+def sources_command(args) -> None:
+    """Print sources usable as planning references; no network connection."""
+    sources = list_public_sources()
+    if args.category:
+        sources = [s for s in sources if s.get("category") == args.category]
+    if args.json:
+        print(json.dumps({"as_of": "2026-10-23", "assets": sources},
+                         ensure_ascii=False, indent=2))
+    else:
+        print("Fontes PUBLICAS CANDIDATAS (nao baixadas, nao testadas):")
+        for source in sources:
+            print("{} | {:11s} | {:15s} | {}".format(
+                source["id"], source.get("category", ""),
+                source["license"], source["title"]))
+            print("  Fonte: {}".format(source["source_url"]))
+    if not sources:
+        print("Nenhuma fonte nessa categoria.")
+
 def prepare_command(args) -> None:
     recipe_id = args.recipe_id or TASKS[args.task]
     doc = build_contract(recipe_id, args.variant, args.reference_id,
@@ -307,6 +360,11 @@ def parser() -> argparse.ArgumentParser:
     p_list = sub.add_parser("list", help="Listar nove receitas publicadas.")
     p_list.add_argument("--json", action="store_true")
     p_list.set_defaults(execute=list_command)
+
+    p_sources = sub.add_parser("sources", help="Listar imagens/modelos publicos (somente links).")
+    p_sources.add_argument("--category")
+    p_sources.add_argument("--json", action="store_true")
+    p_sources.set_defaults(execute=sources_command)
 
     p = sub.add_parser("prepare", help="Preparar contrato para imagem no ChatGPT.")
     task = p.add_mutually_exclusive_group(required=True)
