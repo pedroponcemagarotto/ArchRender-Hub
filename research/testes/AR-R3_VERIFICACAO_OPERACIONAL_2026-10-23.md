@@ -37,3 +37,22 @@ Em ambiente Linux Python 3.13, usando uma **cópia reconstruída** de `tools/met
 5. Revisar a GUI somente depois de o módulo e o benchmark terem evidências suficientes.
 
 **Status global:** integração metodológica e código auxiliar estão **incluídos na PR Draft**, com verificação estática e smoke test parcial. **Não** instalar terceiros e **não** promover para aprovado até a homologação real.
+
+## Adendo — fontes da Internet, fóruns e regressão da versão-base (23/10/2026)
+
+**Fonte verificada:** `catalog/fontes_publicas_r1.json`, com 7 IDs únicos, **2 cenas 3D e 5 fotos**, sete autores/links de licenças e todas as fontes no estado `acquired=false`, `benchmark_status=nao_executado`. Referências e método descritos em `research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md`.
+
+**Conector GitHub:** PR #1 aberta, Draft, `feat/prompt-system-v1` → `main`, **51 commits à frente e zero atrás** na verificação; nenhum `.png`, `.jpg`, `.jpeg`, `.webp`, `.blend`, `.fbx`, `.glb`, `.exr`, `.hdr` ou `.zip` entrou no diff da PR.
+
+**Testes reais executados neste ambiente:**
+
+```
+Origem: /mnt/data/ArchRender_Hub_v0.1.0.zip
+Ambiente: Python 3.13.5, Linux, arquivo ZIP da versão-base
+Comando: python -m unittest discover -s tests -v
+Resultado: Ran 6 tests in 1.002s — OK (6 aprovados)
+```
+
+Isso **comprova somente a regressão da versão-base V0.1 extraída do ZIP**. Não foi a suíte da branch atual nem prova de que os novos `tests/test_fontes_publicas.py` (5 casos) e `tests/test_metodo_integrado.py` passaram. Como o ambiente de execução do container não resolveu o host `github.com`, a branch não pôde ser clonada aqui. Verificações sobre novos arquivos foram estruturais (JSON, caminhos, presença do subcomando e gates do código).
+
+**Próximo gate:** executar a suíte completa no checkout atual da PR, depois inspecionar/baixar uma cena de geometria conhecida pelo canal licenciado correto e produzir um benchmark com referência original de fato entregue ao gerador. **Nenhum benchmark público foi executado nesta atualização.**
