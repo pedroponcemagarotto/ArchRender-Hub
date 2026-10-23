@@ -157,3 +157,17 @@ Próximo trabalho com segurança: executar suíte atualizada no checkout real; e
 **Executado nesta etapa:** seis testes de QA R4 e seis testes API da versão-base passaram no container Linux; resultados reais em duas imagens originais privadas sob refino fotométrico, com alta retenção de bordas, e um falso render gerado por texto corretamente identificado como incompatível com o original. **Não afirmar que a suíte completa da branch passou**, nem que houve render AI fiel homologado: A/B/C ainda **0/6**.
 
 **Ordem agora:** (1) executar toda a suíte da PR no checkout exato sem Actions, (2) garantir transmissão/edição real da imagem mestre ao gerador e registrar seu vínculo, (3) seis variações A/B/C, com QA, (4) ampliar para lavanderia e fontes públicas. Sem merge na main, sem alterações a dados de clientes e sem usar Incubadora Remote V2.
+
+
+## Continuidade R5 — pipeline auditável de imagens
+
+**Arquivos obrigatórios para retomar**:
+1. `knowledge/PIPELINE_IMG2IMG_LOCAL_R5.md` — estratégia Krita AI Diffusion/ComfyUI, custo local, condições de hardware e máscara rígida;
+2. `tools/compor_edicao_mascarada.py` + `tests/test_compor_edicao_mascarada.py` — preservar exatamente os pixels fora da região editável;
+3. `tools/pipeline_img2img_r5.py` + `tests/test_pipeline_img2img_r5.py` — integração com contratos R3, SHA e QA R4;
+4. `research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md` — relatório real do piloto, testes e suas limitações;
+5. `ROADMAP_OPERACIONAL_INTEGRADO_R3.md` — escopo, cronograma e restrições anteriores.
+
+**Status:** 52/52 testes locais em módulos correspondentes às versões GitHub dos scripts/testes; as receitas/catálogo de fontes testadas foram fixtures, e vídeo ficou fora da bateria. Piloto de imagem protegida com cozinha original realmente executado, **zero alterações em pixels não autorizados**. Todos os registros privados ficaram fora da PR. **Não há render generativo image-to-image homologado nem vitória de A/B/C; 0/6**. 
+
+Quando o PC Host ficar online, escolher Krita AI Diffusion + ComfyUI **local**, iniciando modelo leve SD1.5 e região pequena com arquivo original realmente importado e máscara. Antes de qualquer instalação/download massivo, verificar SSD D:, NVIDIA RTX 3060 6 GB e RAM 16 GB; não habilitar serviços de rede desprotegidos nem consumir créditos pagos. **Continuar na PR #1 Draft; não mesclar a main e não usar GitHub Actions ou Incubadora Remote V2**.
