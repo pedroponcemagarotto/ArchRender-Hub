@@ -58,3 +58,16 @@ Classificar cada exemplo pesquisado com:
 ## Limites honestos
 
 Nenhuma combinação de palavras elimina sozinha deriva geométrica, erros de escala, textos ilegíveis, inconsistência temporal ou risco de copyright. Avaliar sempre a saída real.
+
+## Atualização de 23/10/2026 — pesquisa recorrente por lote e imagens públicas
+
+A partir da autorização expressa do usuário, **pesquisar novas fontes técnicas e fóruns em cada novo lote relevante** e manter um catálogo de fotografias/modelos selecionados para benchmark público. O catálogo e o checklist de privacidade/licença estão em [Curadoria Web R1](../research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md) e [Fontes públicas em JSON](../catalog/fontes_publicas_r1.json).
+
+Foram selecionadas, com links rastreáveis, **7 referências: 2 modelos Blender (Classroom CC0, Barcelona Pavillion CC BY) e 5 fotografias de interiores, lavanderia e fachadas** sob licenças Unsplash/Pexels. **Nenhum arquivo foi adquirido ou gerado neste lote.**
+
+**Princípios adicionais:**
+- Uma foto de Internet é **caso público independente** ou referência de material/luz, não a geometria original do projeto privado do usuário.
+- Licenças/condições por item, autoria, direitos de pessoas/marcas/obras e procedência devem ser verificados antes de baixar/transformar/compartilhar. Não confundir Unsplash Free e Unsplash+.
+- [Poly Haven licença CC0](https://polyhaven.com/license): válida para os assets oficiais, não automaticamente para fotos e artes de terceiros mostradas no site.
+- O Enscape/Veras discute uso de *material IDs* e controles de geometria, mas tais recursos **não estão instalados no Hub** e não são parâmetros do image_gen do ChatGPT.
+- Priorizar fóruns de profissionais com evidências rastreáveis, complementados por documentação do fornecedor, e registrar falhas tão cuidadosamente quanto acertos.
