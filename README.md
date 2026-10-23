@@ -151,3 +151,15 @@ python tools/refino_fotometrico.py lavanderia.jpg resultado.png --preset lavande
 No primeiro diagnóstico controlado com imagens privadas, duas fontes de 1536 × 864 tiveram saída na mesma resolução. A retenção de contornos com tolerância de 2 pixels foi de aproximadamente 99,6% e 99,9%, respectivamente, para ajustes fotométricos. Isso não equivale a provar que um resultado de IA preserva geometria. O teste visual A/B/C oficial permanece **0/6**. [Relatório de evidências](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md).
 
 Os novos testes da branch precisam ser rodados no checkout exato e no PC Host antes de homologação. Nenhum binário de cliente foi publicado.
+
+
+## Auditoria estrutural de imagens R4
+
+O novo [QA por contornos](tools/qa_geometria.py) (Python + OpenCV/NumPy opcionais) realiza **triagem local** entre a imagem original e o candidato, com relatórios globais e por regiões, visualização de contornos e bloqueio de diferenças de resolução. Preserva imagens de origem e não acessa a rede. **Não** aprova a arquitetura, não mede dimensões reais e não substitui o gate de comprovação de edição do original implementado em [metodo_integrado.py](tools/metodo_integrado.py).
+
+~~~bash
+python -m pip install numpy opencv-python
+python tools/qa_geometria.py original.jpg resultado.png --anchor janela:0.55,0.25,0.85,0.70 --json data/qa/resultado.json --visual data/qa/visual.png
+~~~
+
+[Relatório R4](research/testes/AR-R4_AUDITORIA_GEOMETRICA_2026-10-23.md): os 6 testes unitários do módulo passaram em container Linux; os 6 testes da API V0.1 base também passaram. A **suíte integral da branch atual não foi executada**, nem houve homologação no PC Host offline. Em dois pares reais de **refino não generativo** houve alta retenção de contornos; uma geração por texto alterou a arquitetura e foi rejeitada como teste fiel. O benchmark A/B/C com fonte comprovada continua **0/6**. Os arquivos originais e de saída não entram no GitHub público.
