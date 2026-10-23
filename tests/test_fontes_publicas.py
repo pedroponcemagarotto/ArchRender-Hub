@@ -46,7 +46,7 @@ class PublicSourceTests(unittest.TestCase):
         self.assertEqual(0, p.returncode, p.stderr)
         self.assertIn("AR-PUB-005", p.stdout)
         self.assertNotIn("AR-PUB-002", p.stdout)
-        self.assertIn("nao baixadas, nao testadas", p.stdout)
+        self.assertIn("Download: nao | Benchmark: nao_executado", p.stdout)
         q = subprocess.run([sys.executable, str(script), "sources", "--json"],
                            capture_output=True, text=True, timeout=15)
         self.assertEqual(0, q.returncode, q.stderr)
@@ -65,8 +65,20 @@ class PublicSourceTests(unittest.TestCase):
             doc["assets"][0]["acquired"] = True
             file.write_text(json.dumps(doc), encoding="utf-8")
             with patch.object(method, "PUBLIC_SOURCES", file):
-                with self.assertRaisesRegex(ValueError, "status deste lote mudou"):
+                with self.assertRaisesRegex(ValueError, "sem evidencia de aquisicao"):
                     method.list_public_sources()
+
+            doc["assets"][0]["acquisition_evidence"] = "sha256:verificado-fora-do-github"
+            doc["assets"][0]["benchmark_status"] = "executado"
+            file.write_text(json.dumps(doc), encoding="utf-8")
+            with patch.object(method, "PUBLIC_SOURCES", file):
+                with self.assertRaisesRegex(ValueError, "sem evidencia"):
+                    method.list_public_sources()
+
+            doc["assets"][0]["benchmark_evidence"] = "AR-PUB-001-R1-RELATORIO"
+            file.write_text(json.dumps(doc), encoding="utf-8")
+            with patch.object(method, "PUBLIC_SOURCES", file):
+                self.assertEqual(7, len(method.list_public_sources()))
 
 
 if __name__ == "__main__":
