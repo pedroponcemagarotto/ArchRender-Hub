@@ -126,12 +126,24 @@ def compose(original: Path, candidate: Path, edit_mask: Path, destination: Path,
         raise AssertionError("Invariante violada: pixel fora da mascara foi alterado.")
 
     destination.parent.mkdir(parents=True, exist_ok=True)
+    created = False
     try:
         with destination.open("xb") as fp:
-            output.save(fp, format="PNG", optimize=True)
+            created = True
+            output.save(fp, format="PNG", optimize=True,
+                        icc_profile=src.info.get("icc_profile"))
+        # Verify the actual file on disk, not just the in-memory composite.
+        with Image.open(destination) as verified_png:
+            verified = verified_png.convert("RGBA")
+        if verified.size != src.size:
+            raise AssertionError("A codificacao alterou as dimensoes.")
+        disk_difference = ImageChops.difference(src, verified)
+        if any(ImageChops.multiply(channel, outside).getbbox()
+               for channel in disk_difference.split()):
+            raise AssertionError("Arquivo exportado alterou pixels bloqueados.")
     except Exception:
-        # Do not leave a misleading partial result.
-        if destination.is_file():
+        # Delete ONLY a file created by this operation, never someone else's.
+        if created and destination.is_file():
             destination.unlink()
         raise
 
@@ -168,15 +180,17 @@ def cli(argv=None) -> int:
     parser.add_argument("--max-edited-fraction", type=float, default=DEFAULT_MAX_EDITED_FRACTION)
     parser.add_argument("--report", type=Path, help="JSON privado, somente arquivo novo")
     args = parser.parse_args(argv)
-    report = compose(args.original, args.candidate, args.mask, args.output,
-                     args.protected_mask, args.feather, args.max_edited_fraction)
-    payload = json.dumps(report, ensure_ascii=False, indent=2)
+    path = None
     if args.report:
         path = args.report.expanduser().resolve()
         if path.exists():
             raise FileExistsError("Relatorio ja existe; nao sobrescrever.")
         if path.suffix.lower() != ".json":
             raise ValueError("Relatorio deve ser JSON.")
+    report = compose(args.original, args.candidate, args.mask, args.output,
+                     args.protected_mask, args.feather, args.max_edited_fraction)
+    payload = json.dumps(report, ensure_ascii=False, indent=2)
+    if path is not None:
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("x", encoding="utf-8") as fp:
             fp.write(payload + "\n")
