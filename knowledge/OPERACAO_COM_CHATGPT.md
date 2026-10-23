@@ -84,3 +84,16 @@ Ao receber pedido de vídeo, separar quatro modalidades:
 - **Vídeo generativo IA local (condicionado):** somente com hardware compatível, licença e recursos verificados; não prometer uso gratuito de serviços cloud.
 
 Guia de instalação, roteiro de cenas, verificação e limitações: \`VIDEO_GRATUITO_PC.md\`. O PC Host não foi verificado nesta fase. O MP4 produzido no ambiente de teste é demonstração curta com duas fontes, e não validação de vídeo arquitetônico final aprovado.
+
+
+## Curadoria pública e fontes da Internet (autorizadas em 23/10/2026)
+
+O usuário autorizou que o assistente **selecione imagens na Internet** para testes independentes e **pesquise de novo, em sites oficiais, GitHub e fóruns apropriados**, quando isso ajudar cada lote de imagens do ArchRender Hub. Referência operacional: [Curadoria Web R1](../research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md) e [Catálogo de fontes](../catalog/fontes_publicas_r1.json).
+
+**Regra de papéis:**
+- Foto pública selecionada **pode ser caso de teste independente ou referência estética**, se a licença permitir e os bytes estiverem realmente disponíveis ao gerador.
+- **Fonte geométrica de um projeto particular:** somente o desenho/modelo/foto original daquele projeto (enviado/autorizado), nunca uma foto da Internet usada para “preencher” informação ausente sem avisar.
+- **Cenas 3D com geometria acessível (ex. Blender Classroom CC0):** preferíveis para benchmark controlado de preservação estrutural.
+- Referência exclusivamente visual pode ajudar a calibrar iluminação e texturas, sem trocar janelas, dimensões e mobiliário do original.
+- O gerador de imagens deste ChatGPT não é obrigado a aceitar URL web como referência editável; **comprovar disponibilidade real da fonte antes de dizer que testou A/B/C**.
+- Manter fotos e projetos de terceiros em pasta privada e respeitar autores, licenças (CC BY exige atribuição), marcas/pessoas e termos próprios do serviço.
