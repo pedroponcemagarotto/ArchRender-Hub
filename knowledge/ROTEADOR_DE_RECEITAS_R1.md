@@ -28,3 +28,9 @@
 10. **Repetição:** uma variável visual por tentativa quando viável; erros persistentes pedem método híbrido/fonte 3D, não apenas prompt maior.
 
 Inspirado nos **conceitos gerais** de [ARCHI Rendering Studio](https://github.com/dakhlallah/arch-render) e [GPT Image Design Prompts](https://github.com/linlhf/gptimage-design-prompts), sem reproduzir templates ou código desses projetos literalmente.
+
+## Roteamento executável (comportamento real)
+
+O script `../tools/metodo_integrado.py` usa a associação determinística tarefa → receita do catálogo, produzindo um contrato A/B/C em `data/workflows`. **Não olha a imagem nem classifica automaticamente o conteúdo.** O operador deve informar a tarefa e âncoras realmente verificadas; a ferramenta inclui avisos caso não haja preservações. `assess` recebe gates manuais e nunca concede aprovação final.
+
+Comandos e prioridades operacionais: [Roadmap R3](../ROADMAP_OPERACIONAL_INTEGRADO_R3.md).
