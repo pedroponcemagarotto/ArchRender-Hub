@@ -33,3 +33,13 @@
 - **Sem instalação de repositórios terceiros**, sem alteração do app/base local V0.1, sem ações pagas ou GitHub Actions.
 - Próximo bloqueio factual: localizar o arquivo original da cozinha/sala no contexto de execução e realizar comparações visuais reais; apenas a documentação não prova ganho de qualidade.
 
+
+
+## 2026-10-23 — Curadoria pública de imagens e fóruns
+
+- Autorização do usuário para **selecionar imagens públicas adequadas** e consultar de forma recorrente sites/fóruns/GitHub ao realizar lotes futuros do ArchRender Hub.
+- [Manifesto das fontes](catalog/fontes_publicas_r1.json) contém 7 itens **com licença, autoria e origem documentadas**: 2 cenas 3D Blender (Classroom CC0 e Barcelona Pavillion CC BY) e 5 fotografias de cozinha, lavanderia e fachadas (Unsplash/Pexels).
+- Documento [Curadoria Web R1](research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md) fixa prioridade de evidência, revisão de licenças e diferencia referência geométrica, estética e foto de terceiros.
+- `tools/metodo_integrado.py sources` lista as fontes offline; [testes estáticos de catálogo](tests/test_fontes_publicas.py) adicionados. **Nenhuma imagem baixada ou renderizada nesta etapa.**
+- Discussões r/archviz, SketchUcation, Enscape/Chaos, documentação Blender/Poly Haven e licenças foram consultadas. Pesquisa pública reforça preservação de geometria e regras de QA; **relatos de fórum não são prova estatística de qualidade**.
+- O benchmark privado da cozinha/sala continua 0/6 e não será contabilizado como concluído por esta curadoria.
