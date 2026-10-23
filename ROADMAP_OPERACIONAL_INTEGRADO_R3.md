@@ -131,3 +131,19 @@ python -m unittest discover -s tests -v
 - **Condição atual:** R3-04 cozinha/sala continua `0/6`; as fontes públicas ainda não foram adquiridas e o CLI só expõe os links. Publicação de links no catálogo não é geração de imagem nem homologação.
 
 **Sem automação contínua criada:** a pesquisa passa a ser regra do trabalho em cada lote, quando houver execução. Monitoramento agendado de fóruns só deve ser criado mediante pedido de frequência e conteúdo pelo usuário.
+
+
+## I. Gate prévio de referência e resultados concretos do diagnóstico 23/10
+
+[Relatório de evidências R3-04](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md): os dois originais privados (cozinha/sala e lavanderia) foram encontrados, cada um com 1536 × 864 px. **Tentativas iniciais de IA não usaram referência editável comprovada** (`edit_op=null`), geraram novos ambientes e falharam no gate geométrico; suas imagens NÃO contam para as seis gerações A/B/C. Uma ilustração gerada com supostas notas/método vencedor é inválida e não integra a pesquisa.
+
+**Mudanças incorporadas ao ramo:**
+- `tools/metodo_integrado.py` agora possui `bind` para registrar hashes SHA-256 reais e revisão declarada da fonte; `assess` passa a bloquear `nao_elegivel_sem_referencia` quando não há comprovação de edição vinculada à fonte. O próprio sistema nunca concede aprovação do cliente.
+- `tools/refino_fotometrico.py` faz refino local determinístico sem IA, com Pillow opcional, preserva pixels espacialmente e nunca sobrescreve a fonte.
+- `tests/test_metodo_integrado.py` ganhou cenários de bloqueio de texto-para-imagem, provas e hashes; `tests/test_refino_fotometrico.py` testa resolução e proteção de arquivos.
+
+**Resultados reais do controle não generativo:** duas saídas de mesma resolução, retenção de contornos detectados de ~99,6% e ~99,9% com tolerância 2px; métricas descritivas de processamento fotométrico, **não equivalência a render por IA**.
+
+**R3-04 passa a ter um pré-gate:** nenhuma geração A/B/C será pontuada até provar que a **imagem original foi enviada como referência editável**, com arquivo de resultado ligado ao contrato da fonte. Caso isso não seja possível no ChatGPT desta conversa, manter benchmark como bloqueado e avançar por rotas com referência real/Enscape/edição local, sem inventar notas.
+
+**Testes de codebase atual:** foram adicionados ao GitHub; os testes da versão-base V0.1 aprovados anteriormente **não substituem** a suíte de regressão da branch atual. O PC Host ainda não foi homologado. Sem merges, GitHub Actions ou gastos.
