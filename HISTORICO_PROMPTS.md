@@ -54,3 +54,14 @@
 - Adicionado script opcional Pillow `tools/refino_fotometrico.py` e testes. Saídas privadas não foram publicadas.
 - Piloto A/B/C oficial permanece **0/6**, antes de comprovar fonte de imagem efetivamente vinculada.
 - Ver [relatório completo](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md).
+
+
+## 2026-10-23 — R5: composição rígida e QA unificado
+
+- Criado `tools/compor_edicao_mascarada.py`, com proteção de todos os canais RGBA fora da máscara, preservação de perfil ICC, verificação do PNG exportado, prevenção de sobrescrita e limpeza segura apenas de saídas realmente criadas. **12 testes passaram**.
+- Criado `tools/pipeline_img2img_r5.py`, que conecta compositor, roteador R3, QA R4, âncoras, geração de diagnóstico e relatórios privados. **8 testes passaram**.
+- Bateria combinada na reconstrução local: **52 testes passaram** envolvendo API, R3, catálogo de fontes, refino, R4 e R5; arquivos de código/teste versionados verificados por hash, com **fixtures nas receitas e catálogo**. Suíte integral real da PR ainda pendente.
+- Piloto com imagem real da cozinha 1536x864 e candidato de **ajuste fotométrico, não IA**, máscara editável e proteção do sofá; **418.142 pixels alterados só onde permitido, 0 nas áreas bloqueadas**, todos os outputs/relatórios mantidos fora do GitHub.
+- O candidato não foi gerado por IA img2img. Status de geração **não comprovado**; `client_approved=false`; benchmark oficial IA **0/6**.
+- Pesquisa oficial confirma [Krita AI Diffusion](https://github.com/Acly/krita-ai-diffusion) + [ComfyUI img2img](https://docs.comfy.org/tutorials/basic/image-to-image) como rota local plausível em RTX 3060 6GB/16GB RAM, mas **não instalada/testada**.
+- Evidências: `research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md`.
