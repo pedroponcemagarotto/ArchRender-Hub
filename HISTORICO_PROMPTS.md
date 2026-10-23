@@ -23,3 +23,13 @@
 - Um ensaio **manual** do pipeline FFmpeg no ambiente de teste usou duas imagens de referência e gerou um MP4 com 1280×720, 24 FPS, 7,5 segundos, H.264, sem áudio. O arquivo privado não foi publicado no GitHub. Em teste de montagem surgiu um erro de frame-rate ao adicionar \`fps,settb,setpts\` ao xfade: corrigido mantendo timebase dos clips previamente normalizados. A transição passou a funcionar nos testes manuais.
 - Criados testes automatizados em \`tests/test_video_local.py\` para validações, composição e execução em ambiente com FFmpeg. **Ainda não executados no PC Host; não declarar aprovação operacional Windows.**
 - Aplicativo Python V0.1 e API existentes preservados; nenhum pacote pesado, código de terceiro ou GitHub Actions instalado. A PR #1 continua Draft.
+
+## 2026-10-23 — R3 — roadmap e método integrado da PR Draft
+
+- Roadmap operacional unificado: entrada, roteador de nove receitas, geração de imagens, gate de geometria, comparador existente, registro privado e backlog controlado para máscaras/profundidade.
+- Novo auxiliar `tools/metodo_integrado.py` com roteamento determinístico, preparação de variantes A/B/C e avaliação manual registrada na pasta privada `data/workflows/`.
+- Testes do auxiliar adicionados a `tests/test_metodo_integrado.py`. **Não anunciar que passaram sem execução efetiva.**
+- Caso piloto `AR-BENCH-001` criado, com seis tentativas **pendentes**: 0/6 nesta nova bateria. Não contar experimentos anteriores como repetição.
+- **Sem instalação de repositórios terceiros**, sem alteração do app/base local V0.1, sem ações pagas ou GitHub Actions.
+- Próximo bloqueio factual: localizar o arquivo original da cozinha/sala no contexto de execução e realizar comparações visuais reais; apenas a documentação não prova ganho de qualidade.
+
