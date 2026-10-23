@@ -110,3 +110,18 @@ python -m unittest discover -s tests -v
 O primeiro experimento comparativo está definido em [AR-BENCH-001 (cozinha/sala)](research/testes/AR-BENCH-001_CASO_INTERIORES_R3.md), com **seis gerações A/B/C pendentes** (não confundir com os experimentos exploratórios anteriores). Imagens privadas não entram no repositório.
 
 **Situação:** documentação e ferramenta auxiliar incorporadas à PR Draft; o benchmark R3 não foi executado. Interface local V0.1 permanece inalterada. A homologação no PC Host e o acoplamento do roteador à interface são fases posteriores.
+
+
+## Curadoria pública de imagens e atualização de fóruns — R1
+
+O Hub agora inclui um [catálogo de sete fontes públicas rastreáveis](catalog/fontes_publicas_r1.json) com duas cenas 3D (geometria verificável) e cinco fotografias de interiores/lavanderia/fachadas, mais uma [política de pesquisa de fóruns e licenças](research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md).
+
+```bash
+python tools/metodo_integrado.py sources
+python tools/metodo_integrado.py sources --category fachadas
+python tools/metodo_integrado.py sources --json
+```
+
+O comando **só consulta metadados locais**; não acessa a internet, não baixa fotos, não gera render e não substitui os originais particulares do usuário. O GitHub contém links e crédito, **não imagens de terceiros**. As fontes serão usadas em benchmarks públicos **se e quando o gerador receber o arquivo de entrada real**, observadas as condições de licenciamento. Para cada lote relevante, a pesquisa de fóruns e documentos oficiais passa a ser etapa regular.
+
+**Status inicial:** 7 fontes curadas; **0 fontes baixadas, 0 testes públicos R1 executados**, R3-04 cozinha/sala privada ainda 0/6.
