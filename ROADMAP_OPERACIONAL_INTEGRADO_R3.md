@@ -147,3 +147,12 @@ python -m unittest discover -s tests -v
 **R3-04 passa a ter um pré-gate:** nenhuma geração A/B/C será pontuada até provar que a **imagem original foi enviada como referência editável**, com arquivo de resultado ligado ao contrato da fonte. Caso isso não seja possível no ChatGPT desta conversa, manter benchmark como bloqueado e avançar por rotas com referência real/Enscape/edição local, sem inventar notas.
 
 **Testes de codebase atual:** foram adicionados ao GitHub; os testes da versão-base V0.1 aprovados anteriormente **não substituem** a suíte de regressão da branch atual. O PC Host ainda não foi homologado. Sem merges, GitHub Actions ou gastos.
+
+
+## J. Diagnóstico estrutural R4 com evidência real
+
+A etapa de garantia visual ganhou [relatório R4](research/testes/AR-R4_AUDITORIA_GEOMETRICA_2026-10-23.md), [analisador de contornos](tools/qa_geometria.py) e [seis testes de regressão](tests/test_qa_geometria.py). O módulo compara arquivo original e candidato por Canny, tolerância ±2px, retângulos de âncora e resolução; produz relatório JSON/visual em área privada. **Não** libera aprovação técnica automaticamente.
+
+**Testes realmente feitos em container Linux:** R4 6/6 OK; API V0.1 baseline 6/6 OK. Fonte original da cozinha contra refino fotométrico local: recall de borda 99,528%; lavanderia 100%. **Uma geração textual não vinculada** divergiu de resolução e, redimensionada só para triagem, teve recall 26,455% global e 9,695% na área do sofá. Números de contorno não são fidelidade geométrica certificada nem desempenho geral de IA.
+
+**Pendente:** suíte completa do checkout atual da PR, execução no Windows/PC Host (offline) e seis edições IA realmente vinculadas ao original. **R3-04 = 0/6 válido**, sem método A/B/C vencedor. Não publicar imagens nem dados privados. A pesquisa externa de 2026 reforça que SSIM/contornos são diagnósticos, não verificação arquitetônica: links e limites no relatório R4.
