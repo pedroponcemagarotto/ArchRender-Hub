@@ -62,3 +62,18 @@ Prepare a apresentação de vídeo a partir somente das imagens arquitetônicas 
 - [ ] Método de produção devidamente identificado.
 
 **Fontes:** Runway Gen-4/Gen-4.5 prompting; links em ../FONTES_E_CURADORIA.md. Esses guias orientam escrita de movimento, não garantem que o ChatGPT desta sessão acesse Runway nem qualquer outro modelo de vídeo.
+
+## Variante AR-VIDEO-FREE-001 — Vídeo gratuito com FFmpeg no PC
+
+**Status:** implementado como pipeline opcional e avaliado em um teste manual curto no ambiente de desenvolvimento; não validado no PC Host. Esta variante **não depende de modelo generativo**. Usar somente imagens aprovadas, preferencialmente várias perspectivas reais de um mesmo projeto.
+
+**Execução Windows:** abrir \`INICIAR_VIDEO_WINDOWS.bat\`, escolher imagens PNG/JPG, ordenar, selecionar 720p para protótipo e 1080p para entrega quando recursos forem suficientes, duração de 4–6 s por imagem e movimento \`auto\` (sutil). Gerar MP4. Se quiser título/logotipo/trilha própria ou licenciada, finalizar no Shotcut.
+
+**Execução CLI:**
+~~~bat
+py -3 tools\video_local.py -o "D:\ArchRender\Videos\apresentacao.mp4" --size 720p --seconds 5 --transition dissolve "D:\ArchRender\fachada.png" "D:\ArchRender\sala.png"
+~~~
+
+**Verificação:** reproduzir início/meio/final; conferir os metadados de duração/FPS/resolução do MP4, pontos de geometria das imagens aprovadas, cortes que omitam elementos críticos, continuidade de estilo e ausência de trilha não licenciada.
+
+**Próximos modos:** DepthFlow para paralaxe 2.5D e Blender com modelo 3D autorizado. LTX Desktop só após confirmação da GPU/RAM/espaço e licença; proibir API paga no modo gratuito. Documentação: \`../VIDEO_GRATUITO_PC.md\`.
