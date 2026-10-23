@@ -61,3 +61,16 @@ As conclusões externas **não** são métricas internas do Hub.
 4. Consolidar comparação humana e depois homologar o aplicativo e o Dell/Windows. Sem merge e sem GitHub Actions.
 
 **Conclusão:** QA de contornos operacional e testado, dois pares fotométricos reais auditados, e um exemplo de reconstrução textual inelegível detectado. **Nenhuma renderização por IA foi homologada.**
+
+## Adendo: nova tentativa de geração por IA após o R4
+
+Foi realizada uma tentativa adicional de criar uma versão mais realista da cozinha no ChatGPT. A saída foi gerada com metadados da ferramenta indicando **edit_op=null** e **parent_gen_id=null**: **não há evidência de edição vinculada à imagem ORIGINAL**, mesmo que a cena descrita pareça arquitetônica.
+
+- Fonte original privada: **1536 × 864 px**.
+- Saída desta tentativa: **1672 × 941 px**.
+- Gate de proveniência: **não comprovado**. A tentativa permanece **fora do benchmark A/B/C**; contagem **0/6**.
+- O novo QA R4 sinalizou resoluções incompatíveis. Quando redimensionado **somente para triagem** (sem aprovação ou equivalência geométrica), registrou **Canny recall 29,081%** e **precision 10,699%**.
+- Recall por âncora: **sofá 13,716%**, **geladeira 18,702%**, **janela/pia 30,995%**, **bancada 11,852%**.
+- A saída textual alterou volumetria e objetos em relação à fonte. Este fracasso permanece documentado; não inventar avaliação positiva nem recomendar método vencedor.
+
+**Próxima decisão:** interromper tentativas textuais que não conseguem anexar a imagem original como entrada real. Só retomar benchmark generativo com ferramenta que aceite explicitamente image-to-image e forneça evidência de vínculo. Enquanto isso, aprimoramentos fotométricos e QA continuam utilizáveis sem redesenho.
