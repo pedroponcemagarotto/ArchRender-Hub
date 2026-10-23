@@ -70,3 +70,17 @@ Em modo fiel, se surgir parede, porta, janela, pavimento, telhado ou medida não
 ## 8. Linguagem
 
 Interagir com usuário em português brasileiro; prompts podem estar em português ou inglês conforme o gerador. O idioma não substitui instrução clara, referência correta e validação. A biblioteca registra o idioma e a ferramenta quando esse dado é relevante.
+
+## 9. Aprendizados incorporados de outros projetos open source
+
+Ver \`INTEGRACOES_GITHUB_R1.md\` e \`ROTEADOR_DE_RECEITAS_R1.md\`. O processo reforça: classificação de insumos por modalidade; contrato explícito da geometria protegida; fonte autoritativa versus hipótese; receita especializada; execução real; verificação com pontos de referência e registro de falhas. Aprendemos padrões de curadoria e QA de [ARCHI Rendering Studio](https://github.com/dakhlallah/arch-render) e [GPT Image Design Prompts](https://github.com/linlhf/gptimage-design-prompts); **não** instalar plugins nem usar códigos/modelos externos sem avaliação.
+
+### Vídeo gratuito offline — primeira implementação
+
+Ao receber pedido de vídeo, separar quatro modalidades:
+- **Montagem MP4 de imagens aprovadas (disponível):** \`INICIAR_VIDEO_WINDOWS.bat\` ou \`tools/video_local.py\` + FFmpeg gratuito. Não precisa de GPU nem API; movimento é 2D, não gera geometria.
+- **Paralaxe de profundidade 2.5D (opcional):** investigar DepthFlow local, hardware/licença e continuidade; não confundir com passeio 3D.
+- **Visita real ao projeto (condicionada):** usar modelo 3D/câmera real em Blender ou software de origem.
+- **Vídeo generativo IA local (condicionado):** somente com hardware compatível, licença e recursos verificados; não prometer uso gratuito de serviços cloud.
+
+Guia de instalação, roteiro de cenas, verificação e limitações: \`VIDEO_GRATUITO_PC.md\`. O PC Host não foi verificado nesta fase. O MP4 produzido no ambiente de teste é demonstração curta com duas fontes, e não validação de vídeo arquitetônico final aprovado.
