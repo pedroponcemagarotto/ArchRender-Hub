@@ -148,3 +148,12 @@ As fontes originais privadas (cozinha/sala e lavanderia, ambas 1536 × 864 px) f
 O novo `tools/metodo_integrado.py bind` registra hashes dos arquivos originais e gerados com status de vínculo de fonte; `assess` agora recusa candidato sem referência comprovada. `tools/refino_fotometrico.py` oferece alternativa de correção de luz/cor sem geração IA, foi utilizada em dois exemplos reais sem sobrescrever originais (os binários NÃO estão no GitHub). Não confundir controle fotométrico com benchmark A/B/C; **0/6** imagens válidas ainda.
 
 Próximo trabalho com segurança: executar suíte atualizada no checkout real; estabelecer edição **imagem-para-imagem** com fonte verdadeiramente transmitida e metadados; depois A/B/C. Fontes públicas Blender/Pexels seguem opcionais, com direitos e links registrados.
+
+
+## Continuidade a partir da auditoria R4 — 23/10/2026
+
+**R4 implementado em PR Draft:** ler [relatório de QA R4](research/testes/AR-R4_AUDITORIA_GEOMETRICA_2026-10-23.md), [código de auditoria](tools/qa_geometria.py) e [testes R4](tests/test_qa_geometria.py). O programa detecta indícios de alteração estrutural em quadro e ancoras individuais, sem decidir sozinho se o projeto está correto.
+
+**Executado nesta etapa:** seis testes de QA R4 e seis testes API da versão-base passaram no container Linux; resultados reais em duas imagens originais privadas sob refino fotométrico, com alta retenção de bordas, e um falso render gerado por texto corretamente identificado como incompatível com o original. **Não afirmar que a suíte completa da branch passou**, nem que houve render AI fiel homologado: A/B/C ainda **0/6**.
+
+**Ordem agora:** (1) executar toda a suíte da PR no checkout exato sem Actions, (2) garantir transmissão/edição real da imagem mestre ao gerador e registrar seu vínculo, (3) seis variações A/B/C, com QA, (4) ampliar para lavanderia e fontes públicas. Sem merge na main, sem alterações a dados de clientes e sem usar Incubadora Remote V2.
