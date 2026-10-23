@@ -1,5 +1,8 @@
 # ArchRender Hub — V0.1.0
 
+
+> **Fluxo visual com ChatGPT:** a V0.1 abaixo é um catálogo local. O novo [Prompt System v1](PROMPT_SYSTEM_v1.md) reúne receitas especializadas para produção assistida de plantas humanizadas, plantas baixas, fachadas, interiores, paisagismo e vídeos; consulte [protocolo](knowledge/OPERACAO_COM_CHATGPT.md) e [fontes](knowledge/FONTES_E_CURADORIA.md). **O usuário solicita a imagem e o ChatGPT a cria com ferramenta disponível; o banco local não gera imagens nem vídeos sozinho.** Prompts do V1 estão em status de candidatos até passarem por testes reais.
+
 Biblioteca **local e privada** de prompts e receitas para visualização arquitetônica. Interface em português do Brasil. Não precisa de Docker, GPU, API paga ou conta na nuvem. Construída com Python (biblioteca padrão), SQLite, HTML, CSS e JavaScript.
 
 > **Estado:** MVP local para uso individual. As receitas de demonstração são exemplos autorais sem renders gerados. Os resultados dos prompts não foram testados em serviços externos. Não é CAD/BIM e nenhuma regra textual garante a preservação de geometria: valide a imagem gerada contra os desenhos do projeto.
