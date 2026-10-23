@@ -122,3 +122,18 @@ Para continuar sem reiniciar o trabalho, leia o roadmap R3, o [piloto da cozinha
 **Prioridade ativa:** primeiro executar o benchmark real de cozinha/sala (A/B/C, duas repetições por variante), depois lavanderia, depois fachadas/plantas. Iniciar cada geração a partir da imagem ORIGINAL acessível na conversa, nunca de um render já adulterado. Se não houver o original visível/anexado, não inventar que há arquivo ou que a geração foi feita.
 
 **Restrições em vigor:** sem Incubadora Remote V2, sem GitHub Actions, sem uso obrigatório de Docker/GPU, sem dados de cliente na PR pública, sem merge não aprovado. Vídeos ficaram em segundo plano por decisão do usuário.
+
+
+## Autorização permanente de fontes públicas — 23/10/2026
+
+O usuário **autorizou expressamente** selecionar imagens adequadas na Internet e **solicitou pesquisas técnicas de sites e fóruns** ao longo do desenvolvimento. Esta diretriz deve ser aplicada em cada lote relevante, com fontes atuais e credíveis, sem esperar por imagens privadas para iniciar **testes públicos** seguros.
+
+Antes de continuar, ler:
+- `research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md` — procedimento de curadoria, direitos, fontes/forum e seleção;
+- `catalog/fontes_publicas_r1.json` — 7 fontes públicas selecionadas e rastreáveis (2 cenas 3D e 5 fotografias), sem arquivos baixados;
+- `ROADMAP_OPERACIONAL_INTEGRADO_R3.md` — status/etapas e distinção entre benchmarking privado e público;
+- `research/PESQUISA_FORUNS_E_FONTES_2026-10-23.md` — pesquisa anterior e contraexemplos de deriva geométrica.
+
+O roteador offline conta com `python tools/metodo_integrado.py sources` e `sources --category interiores`. **Ele só lê o manifesto, não baixa imagens.**
+
+**Obrigatório:** sempre apontar a origem, a licença, o autor, o status real (selecionado/baixado/editado/revisado) e não confundir licença de banco de imagem com domínio público. Jamais fingir que uma foto da busca web já chegou ao gerador nativo de imagens. Caso a edição não possa usar uma fonte web diretamente, informar a limitação e escolher via outro fluxo real.
