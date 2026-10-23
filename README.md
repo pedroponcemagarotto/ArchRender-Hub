@@ -163,3 +163,19 @@ python tools/qa_geometria.py original.jpg resultado.png --anchor janela:0.55,0.2
 ~~~
 
 [Relatório R4](research/testes/AR-R4_AUDITORIA_GEOMETRICA_2026-10-23.md): os 6 testes unitários do módulo passaram em container Linux; os 6 testes da API V0.1 base também passaram. A **suíte integral da branch atual não foi executada**, nem houve homologação no PC Host offline. Em dois pares reais de **refino não generativo** houve alta retenção de contornos; uma geração por texto alterou a arquitetura e foi rejeitada como teste fiel. O benchmark A/B/C com fonte comprovada continua **0/6**. Os arquivos originais e de saída não entram no GitHub público.
+
+
+## Fluxo integrado com máscaras R5 (testado localmente)
+
+O ArchRender Hub incorpora [composição segura de pixels](tools/compor_edicao_mascarada.py) e um [pipeline R5](tools/pipeline_img2img_r5.py) que conecta: original → candidato → máscara de edição + máscara opcional de proteção rígida → PNG final sem perdas → QA por contornos e âncoras → relatório local privado, **sem aprovação automática**.
+
+**Uma única execução para preparar o teste e registrar o diagnóstico:**
+
+```bash
+python -m pip install pillow numpy opencv-python
+python tools/pipeline_img2img_r5.py --original data/privado/original.jpg --candidate data/privado/candidato.png --mask data/privado/mascara.png --output data/privado/saida.png --reference-id ref-interior-001 --candidate-mode unknown
+```
+
+Ver [tutorial local R5](knowledge/PIPELINE_IMG2IMG_LOCAL_R5.md) e [relatório de teste R5](research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md). No piloto com cozinha original 1536 × 864, foram registrados **zero pixels alterados fora da máscara e da proteção do sofá**, mantendo revisão manual obrigatória.
+
+**Validação:** 52/52 testes locais aprovados em módulos com código/testes de hashes idênticos aos arquivos da PR. **Não é execução do checkout integral exato**: o teste local usou fixtures nas receitas e no catálogo de imagens, e os testes de vídeo/Windows não entraram no lote. As seis gerações A/B/C de IA img2img com referência comprovada continuam pendentes **0/6**. A ferramenta é local e **não executa nem instala um modelo de IA**; o candidato deve ser produzido com ferramenta de imagem realmente alimentada pelo original.
