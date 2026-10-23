@@ -9,6 +9,7 @@ Supports Python >= 3.9, no third-party packages.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from datetime import datetime, timezone
 import json
 import os
@@ -218,6 +219,98 @@ def save_json_private(doc: dict, destination: Path) -> Path:
     return target
 
 
+def source_bound_for_qa(doc: dict) -> bool:
+    """Deny fidelity eligibility unless source use has evidence and was reviewed.
+
+    A text-to-image result cannot certify geometric preservation of a specific
+    supplied plan, even if its prompt describes the same furniture.
+    """
+    gen = doc.get("generation", {})
+    if not isinstance(gen, dict):
+        return False
+    return all((
+        doc.get("reviewed_source") is True,
+        gen.get("status") == "gerada",
+        gen.get("mode") == "image_edit",
+        gen.get("source_bound") is True,
+        isinstance(gen.get("source_sha256"), str) and len(gen["source_sha256"]) == 64,
+        isinstance(gen.get("output_sha256"), str) and len(gen["output_sha256"]) == 64,
+        bool(gen.get("binding_evidence")),
+        bool(gen.get("tool")),
+    ))
+
+
+def _hash_image(file: Path) -> dict:
+    """Hash actual, local image bytes; no requests or image decoding libraries."""
+    file = file.expanduser().resolve()
+    if not file.is_file() or file.stat().st_size > 80 * 1024 * 1024:
+        raise ValueError("Imagem nao existe ou excede 80 MB.")
+    size = file.stat().st_size
+    if size < 32:
+        raise ValueError("Arquivo de imagem pequeno demais.")
+    with file.open("rb") as f:
+        first = f.read(16)
+        f.seek(0)
+        digest = hashlib.sha256()
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            digest.update(chunk)
+    allowed = (first.startswith(b"\x89PNG\r\n\x1a\n") or
+               first.startswith(b"\xff\xd8\xff") or
+               (first.startswith(b"RIFF") and first[8:12] == b"WEBP"))
+    if not allowed:
+        raise ValueError("Formato de imagem invalido: use PNG, JPEG ou WebP.")
+    return {"sha256": digest.hexdigest(), "bytes": size, "name": file.name}
+
+
+def register_generation(doc: dict, original: Path, output: Path,
+                        mode: str, tool: str, evidence: str = "",
+                        source_inspected: bool = False) -> dict:
+    """Record observed file hashes and a *declaration* of image-edit provenance.
+
+    Evidence text must describe a genuine tool-reported attachment/edit log
+    reviewed by a person. Merely providing two images is NOT an image edit.
+    """
+    if not isinstance(doc, dict) or "workflow_id" not in doc:
+        raise ValueError("Documento R3 invalido.")
+    if mode not in ("image_edit", "text_to_image", "local_color", "unknown"):
+        raise ValueError("Modo de geracao invalido.")
+    if not isinstance(tool, str) or not (2 <= len(tool.strip()) <= 100):
+        raise ValueError("Informe a ferramenta real utilizada.")
+    if not isinstance(evidence, str) or len(evidence) > 400:
+        raise ValueError("Evidencia de vinculo muito longa.")
+    src = _hash_image(original)
+    dst = _hash_image(output)
+    if src["sha256"] == dst["sha256"]:
+        raise ValueError("Entrada e saida identicas; nenhum resultado novo.")
+    generated = json.loads(json.dumps(doc, ensure_ascii=False))
+    bound = bool(mode == "image_edit" and source_inspected and evidence.strip())
+    generated["reviewed_source"] = bool(source_inspected)
+    generated["generation"] = {
+        "status": "gerada",
+        "mode": mode,
+        "tool": tool.strip(),
+        "source_sha256": src["sha256"],
+        "source_bytes": src["bytes"],
+        "output_sha256": dst["sha256"],
+        "output_bytes": dst["bytes"],
+        "output_dimensions_px": None,
+        "output_reference": "ARQUIVO_PRIVADO",
+        "binding_evidence": evidence.strip() if mode == "image_edit" else "",
+        "source_bound": bound,
+        "binding_status": "declarado_e_revisado_manualmente" if bound else "nao_comprovado",
+        "recorded_at": utc_now(),
+    }
+    generated["qa"] = {
+        "gates": dict.fromkeys(GATE_NAMES, "nao_avaliado"),
+        "editorial_score": None,
+        "decision": "nao_avaliado",
+        "client_approved": False,
+        "issues": [],
+        "human_review_required": True,
+    }
+    return generated
+
+
 def assess(doc: dict, gates: dict, score: Optional[int]) -> dict:
     """Record manually reported evidence. Never declare client approval."""
     if not isinstance(doc, dict) or "workflow_id" not in doc or "qa" not in doc:
@@ -232,6 +325,8 @@ def assess(doc: dict, gates: dict, score: Optional[int]) -> dict:
         decision = "reprovado"
     elif any(x == "nao_verificavel" for x in gates.values()):
         decision = "nao_verificavel"
+    elif not source_bound_for_qa(doc):
+        decision = "nao_elegivel_sem_referencia"
     elif score is None:
         decision = "aguarda_nota_editorial"
     elif score < 85:
@@ -343,6 +438,24 @@ def prepare_command(args) -> None:
         print("\n--- PROMPT PARA CHATGPT ---\n" + doc["prompt"] + "\n--- FIM ---")
 
 
+def bind_command(args) -> None:
+    source = _within_private_folder(args.file)
+    if not source.is_file() or source.stat().st_size > 256 * 1024:
+        raise ValueError("Contrato privado inexistente ou grande demais.")
+    doc = json.loads(source.read_text(encoding="utf-8"))
+    modified = register_generation(
+        doc, args.original, args.result, args.mode, args.tool,
+        args.binding_evidence, args.source_inspected,
+    )
+    target = workflow_dir() / (
+        modified["workflow_id"] + "-generation-" + uuid4().hex[:8] + ".json"
+    )
+    save_json_private(modified, target)
+    print("Arquivos registrados (originais preservados): " + str(target))
+    print("Vinculo de imagem original: " + modified["generation"]["binding_status"])
+    print("Nenhum resultado foi aprovado automaticamente.")
+
+
 def assess_command(args) -> None:
     source = _within_private_folder(args.file)
     if not source.is_file() or source.stat().st_size > 256 * 1024:
@@ -392,6 +505,16 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--camera", default="")
     p.add_argument("--show-prompt", action="store_true")
     p.set_defaults(execute=prepare_command)
+
+    b = sub.add_parser("bind", help="Registrar arquivos originais e resultado para QA.")
+    b.add_argument("--file", type=Path, required=True)
+    b.add_argument("--original", type=Path, required=True)
+    b.add_argument("--result", type=Path, required=True)
+    b.add_argument("--mode", choices=("image_edit", "text_to_image", "local_color", "unknown"), required=True)
+    b.add_argument("--tool", required=True)
+    b.add_argument("--binding-evidence", default="")
+    b.add_argument("--source-inspected", action="store_true")
+    b.set_defaults(execute=bind_command)
 
     q = sub.add_parser("assess", help="Registrar avaliacao humana de uma geracao.")
     q.add_argument("--file", type=Path, required=True)
