@@ -97,7 +97,7 @@ python tools/metodo_integrado.py prepare --task interiores --variant C \
     --preserve "janela preta no lado direito" \
     --preserve "geladeira inox no centro" \
     --change "corrigir apenas luz e textura"
-python tools/metodo_integrado.py assess --file data/workflows/<arquivo.json> \
+python tools/metodo_integrado.py assess --file "data/workflows/AR-WF-ID_AQUI.json" \
     --geometry passou --camera passou --materials passou --artifacts passou --score 89
 python -m unittest discover -s tests -v
 ```
