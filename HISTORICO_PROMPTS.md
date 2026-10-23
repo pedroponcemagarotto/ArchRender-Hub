@@ -43,3 +43,14 @@
 - `tools/metodo_integrado.py sources` lista as fontes offline; [testes estáticos de catálogo](tests/test_fontes_publicas.py) adicionados. **Nenhuma imagem baixada ou renderizada nesta etapa.**
 - Discussões r/archviz, SketchUcation, Enscape/Chaos, documentação Blender/Poly Haven e licenças foram consultadas. Pesquisa pública reforça preservação de geometria e regras de QA; **relatos de fórum não são prova estatística de qualidade**.
 - O benchmark privado da cozinha/sala continua 0/6 e não será contabilizado como concluído por esta curadoria.
+
+
+## 2026-10-23 — R3-04: falha de vínculo real e refino sem geração
+
+- Dois originais privados (cozinha/sala e lavanderia, 1536 × 864 px) estavam disponíveis no ambiente local.
+- Duas gerações de imagens por texto no ChatGPT não apresentaram prova de edição a partir da referência (`edit_op=null`/`parent_gen_id=null`), alteraram a estrutura e foram reprovadas como testes de fidelidade. Quadro de pontuações ilustrativo criado por IA é inválido.
+- Implantados `bind`/hashes e decisão `nao_elegivel_sem_referencia` na ferramenta de QA, com testes de regressão associados.
+- Executado controle local **sem IA**: correção de iluminação/cor, 2 imagens preservando 1536×864 e alto overlap de contornos (99,6% e 99,9%, ±2px). Controle não prova renderização por IA.
+- Adicionado script opcional Pillow `tools/refino_fotometrico.py` e testes. Saídas privadas não foram publicadas.
+- Piloto A/B/C oficial permanece **0/6**, antes de comprovar fonte de imagem efetivamente vinculada.
+- Ver [relatório completo](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md).
