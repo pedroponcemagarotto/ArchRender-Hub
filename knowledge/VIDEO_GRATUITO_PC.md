@@ -35,6 +35,26 @@ Formatos: entrada PNG, JPG, WebP e BMP; saída MP4 H.264 sem áudio por padrão.
 
 O pipeline produz arquivos de vídeo intermediários em pasta temporária, com \`ffmpeg\`, e a remove automaticamente. **Nada é enviado à internet pelo script**. A licença do FFmpeg depende da build baixada; a do nosso código é a licença MIT do Hub.
 
+## Opcao com IA real: FramePack (RTX 3060)
+
+**Verificado nas especificacoes oficiais em 23/10/2026:**
+- A Dell informa que o G15 5515/5511 com **RTX 3060 possui 6 GB de VRAM GDDR6** (o modelo G15 exato do usuario ainda nao foi consultado).
+- O autor do [FramePack (GitHub OFICIAL)](https://github.com/lllyasviel/FramePack) exige **NVIDIA RTX 30xx/40xx/50xx com ao menos 6 GB VRAM**; laptops RTX 3060 sao contemplados. Ele tambem afirma que esses laptops sao varias vezes mais lentos do que um desktop RTX 4090; o tempo real depende de RAM, drivers e disco.
+- Windows e Linux suportados. O pacote Windows instala modelos **acima de 30 GB** por download; nao instalar sem checar espaco livre e memoria RAM. Com 16 GB de RAM, offloading pesado pode causar lentidao ou falta de memoria; 32 GB ou mais e recomendacao operacional prudente, nao requisito minimo oficial confirmado.
+- **Licenca:** o codigo FramePack foi identificado como Apache-2.0 no GitHub, **mas** os pesos HunyuanVideo seguem a [Tencent Hunyuan Community License](https://huggingface.co/tencent/HunyuanVideo/raw/main/LICENSE), diferente de Apache. Conferir direitos de uso, territorios e termos se for usado comercialmente.
+- Os autores **alertam sobre sites falsos** que se passam por FramePack; baixar apenas em https://github.com/lllyasviel/FramePack . Nao abrir pacotes de sites "framepack-ai" nao oficiais.
+- O modelo realmente **sintetiza frames novos** a partir de uma imagem, como movimento de camera e elementos. E muito mais proximo de video generativo que FFmpeg/DepthFlow, mas pode distorcer esquadrias, mudar superficies e inventar geometria oculta. Testar curtas sequencias de 3 a 5 segundos com camera discreta, e inspecionar quadros inicial, medio e final contra referencia.
+
+**Decisao:** FramePack e o primeiro **candidato local gratuito de IA gerativa de video** a ser homologado no Dell G15 RTX 3060; **nao instalado, nao executado, sem promessa de qualidade ou velocidade**. Medir RAM, VRAM, SSD livre em D:, driver/CUDA e versao real do Windows primeiro. Nao alterar outros projetos do PC.
+
+**Caminho de producao quando o PC estiver disponivel:**
+1. ChatGPT gera/refina imagens e usuario aprova o layout.
+2. FramePack gera planos individuais curtos a partir dessas imagens (IA, com aviso de possiveis alteracoes).
+3. DepthFlow e a alternativa **nao generativa** com paralaxe quando a preservacao importa mais.
+4. Hub/FFmpeg une planos em MP4, exporta e valida duracao/fps/resolucao; Shotcut adiciona titulos e trilha licenciada.
+
+A qualidade editorial vem principalmente da **imagem-base**, da fidelidade das vistas e da continuidade entre planos. **Ter RTX 3060 nao melhora sozinho qualidade da fonte ou "transforma 720p em 4K real".** O gerador atual \`tools/video_local.py\` usa libx264 na CPU; a GPU NVENC ainda nao esta integrada nesse script. NVENC acelera codificacao, nao adiciona realismo.
+
 ## Etapas para elevar a qualidade sem pagar
 
 **Nível 1 — imediato e leve:** FFmpeg + ChatGPT gera/avalia as imagens + Shotcut edita o MP4.
