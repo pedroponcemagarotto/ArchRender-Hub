@@ -112,3 +112,13 @@ Status verificado: ensaio manual de FFmpeg no ambiente de desenvolvimento (víde
 O guia [Integracao ChatGPT > Runway / Higgsfield / Luma](knowledge/INTEGRACAO_CHATGPT_VIDEO_SERVICOS_R1.md) registra opcoes reais de **image-to-video por conector**, custos confirmados, creditos e requisitos. **Runway** e a primeira recomendacao, com plugin ChatGPT disponivel mas que exige conexao pelo usuario e saldo no Runway; o plano Free possui creditos unicos, nao renovaveis. **Higgsfield** consome creditos no plugin, mesmo quando ha geracoes gratuitas no website. **Luma** pode ser barata por video, mas precisa de bridge/API propria: nao fingir que ja ha plugin nativo operacional.
 
 Regras: ChatGPT cria a imagem > usuario aprova > verificar se o conector realmente pode receber o anexo > consultar custo/creditos e pedir aprovacao antes de gastar > gerar um take curto > checar fidelidade > montar o MP4. **Nao afirmar que o workflow ponta a ponta foi executado** enquanto a conta do usuario nao estiver conectada. Proteger projetos de cliente fora do GitHub publico.
+
+## Ordem R3 — metodologia integrada para imagens
+
+**Arquivo primário:** [ROADMAP_OPERACIONAL_INTEGRADO_R3.md](ROADMAP_OPERACIONAL_INTEGRADO_R3.md).
+
+Para continuar sem reiniciar o trabalho, leia o roadmap R3, o [piloto da cozinha/sala](research/testes/AR-BENCH-001_CASO_INTERIORES_R3.md) e os arquivos da PR Draft. Revalide o HEAD antes de alterar qualquer arquivo. As nove receitas e o comparador estão no projeto; o roteador de fluxo `tools/metodo_integrado.py` prepara prompts e relatórios privados, sem gerar imagens sozinho.
+
+**Prioridade ativa:** primeiro executar o benchmark real de cozinha/sala (A/B/C, duas repetições por variante), depois lavanderia, depois fachadas/plantas. Iniciar cada geração a partir da imagem ORIGINAL acessível na conversa, nunca de um render já adulterado. Se não houver o original visível/anexado, não inventar que há arquivo ou que a geração foi feita.
+
+**Restrições em vigor:** sem Incubadora Remote V2, sem GitHub Actions, sem uso obrigatório de Docker/GPU, sem dados de cliente na PR pública, sem merge não aprovado. Vídeos ficaram em segundo plano por decisão do usuário.
