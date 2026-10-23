@@ -94,3 +94,24 @@ Não instalar modelos nem frameworks até verificação de recursos no PC Host e
 | QA arquitetônico completo de gerações com IA | **não homologado** |
 
 **Princípio:** não transformar uma cena completamente diferente em suposto projeto aprovado. A geração deve operar **na imagem fonte original** e a máscara deve limitar o que pode aparecer no resultado.
+
+
+## 7. Integração única do compositor + QA + registro R3
+
+O script `tools/pipeline_img2img_r5.py` reduz os comandos manuais. Ele prepara a receita, faz a composição por máscara, calcula o QA R4 (sem aprovar a arquitetura) e salva a documentação de proveniência R3 em `data/workflows/` ou em `ARCHRENDER_DATA_DIR/workflows/`. Não usa API, modelo, rede nem créditos; o arquivo candidato **já precisa existir**.
+
+```bash
+python tools/pipeline_img2img_r5.py \
+  --original data/privado/original.jpg \
+  --candidate data/privado/candidato.png \
+  --mask data/privado/mascara-editavel.png \
+  --protected-mask data/privado/mascara-protecao.png \
+  --output data/privado/saida.png \
+  --reference-id ref-cozinha-001 --task interiores --variant C \
+  --preserve "portas e janelas inalteradas" \
+  --anchor sofa:0.01,0.62,0.41,0.99 --candidate-mode unknown
+```
+
+O programa sempre grava `client_approved=false` e `benchmark_completed=false`. Para imagens candidatas de ajuste fotométrico local, use `--candidate-mode local_color`; para resultados de IA image-to-image que **comprovadamente usaram o original**, `--candidate-mode image_edit`, `--source-inspected` e `--binding-evidence` podem registrar evidência declarada, mas **não garantem aprovação**. Não confundir declaração do operador com atestado criptográfico do serviço.
+
+**Nova bateria:** 12 testes do compositor, 8 do orquestrador; 52/52 na reconstrução integrada local. Ver [relatório R5](../research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md). A montagem com originais reais foi executada; gerador Krita/ComfyUI e benchmarking de IA A/B/C ainda pendentes.
