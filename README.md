@@ -80,3 +80,17 @@ Este ZIP está pronto para ser iniciado em um repositório Git próprio. Para pu
 ## Fontes e licença do conteúdo
 
 As receitas de demonstração foram escritas para este projeto e não são reproduções de prompts de repositórios alheios. Antes de importar receitas ou imagens de outras fontes, verifique atribuição, termos de uso e autorização do autor.
+
+
+## Novo complemento experimental: vídeos gratuitos no próprio PC
+
+Além da biblioteca V0.1, esta branch disponibiliza um **gerador independente de MP4 offline**, com interface Windows em \`INICIAR_VIDEO_WINDOWS.bat\`, GUI Python e FFmpeg. É opcional, **não substitui** o app atual, não requer GPU, Docker, assinatura nem API paga e não envia imagens para a internet. Usa fotos/renders aprovados e realiza *pan*, *zoom* suave e transições; **não** gera vídeo com IA, pessoas em movimento nem visita 3D autêntica.
+
+**Como usar no Windows:** instale o FFmpeg gratuito pelo site oficial https://ffmpeg.org/download.html, configure-o no PATH (ou selecione o executável na GUI), execute \`INICIAR_VIDEO_WINDOWS.bat\`, selecione imagens, ordene os planos, escolha 720p/1080p e salve o MP4. Para títulos/músicas, use o editor gratuito [Shotcut](https://shotcut.com/). Para animação de profundidade opcional, investigamos [DepthFlow](https://github.com/BrokenSource/DepthFlow) sob sua licença AGPL-3.0; não está instalado ou integrado como dependência.
+
+- [Manual do vídeo gratuito](knowledge/VIDEO_GRATUITO_PC.md)
+- [Métodos de projetos GitHub incorporados](knowledge/INTEGRACOES_GITHUB_R1.md)
+- [Roteador de receitas do ChatGPT](knowledge/ROTEADOR_DE_RECEITAS_R1.md)
+- [Testes do complemento](tests/test_video_local.py) — verificação local com FFmpeg quando presente; não há GitHub Actions.
+
+**Status:** este complemento entrou como código na PR de desenvolvimento e o fluxo de FFmpeg foi experimentado no ambiente de teste com 2 imagens e um MP4 de 7,5 s/720p. **O PC Host não foi homologado** (conector desconectado na verificação). As imagens e o vídeo de demonstração não foram enviados ao GitHub público. Não confundir o novo gerador com função do banco local V0.1: o inicializador de vídeo é separado.
