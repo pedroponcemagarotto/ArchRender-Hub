@@ -20,3 +20,15 @@ Thumbs.db
 /workspaces-private/
 *.sqlite
 *.sqlite3
+
+
+# Nao versionar entregas multimidia nem trilhas de clientes
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.m4a
+*.wav
+*.flac
