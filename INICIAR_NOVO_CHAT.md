@@ -105,3 +105,10 @@ Antes de começar um trabalho sobre vídeos, leia \`knowledge/VIDEO_GRATUITO_PC.
 O modo imediato no Windows é **\`INICIAR_VIDEO_WINDOWS.bat\` + FFmpeg instalado localmente**. Cria MP4 com zoom/pan e transição, sem GPU obrigatória, sem API e sem vídeo IA. O ChatGPT continua gerando as imagens iniciais e acompanhando o storyboard; apenas imagens aprovadas alimentam o renderizador gratuito. DepthFlow é opção futura para paralaxe 2.5D e Blender para passeio com geometria 3D real.
 
 Status verificado: ensaio manual de FFmpeg no ambiente de desenvolvimento (vídeo curto 1280x720/24 FPS/7,5 s), **sem implantação no PC Host**. Não enviar imagens privadas ou MP4 a este GitHub público. PR #1 segue Draft; não presumir merged.
+
+
+## Video por servicos conectados no ChatGPT (23/10/2026)
+
+O guia [Integracao ChatGPT > Runway / Higgsfield / Luma](knowledge/INTEGRACAO_CHATGPT_VIDEO_SERVICOS_R1.md) registra opcoes reais de **image-to-video por conector**, custos confirmados, creditos e requisitos. **Runway** e a primeira recomendacao, com plugin ChatGPT disponivel mas que exige conexao pelo usuario e saldo no Runway; o plano Free possui creditos unicos, nao renovaveis. **Higgsfield** consome creditos no plugin, mesmo quando ha geracoes gratuitas no website. **Luma** pode ser barata por video, mas precisa de bridge/API propria: nao fingir que ja ha plugin nativo operacional.
+
+Regras: ChatGPT cria a imagem > usuario aprova > verificar se o conector realmente pode receber o anexo > consultar custo/creditos e pedir aprovacao antes de gastar > gerar um take curto > checar fidelidade > montar o MP4. **Nao afirmar que o workflow ponta a ponta foi executado** enquanto a conta do usuario nao estiver conectada. Proteger projetos de cliente fora do GitHub publico.
