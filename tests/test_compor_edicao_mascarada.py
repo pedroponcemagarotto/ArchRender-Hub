@@ -110,6 +110,23 @@ class TestMaskR5(unittest.TestCase):
             self.assertEqual(f.convert("RGBA").getpixel((0, 0)), (100, 50, 50, 0))
         self.assertEqual(result["locked_pixel_changes"], 0)
 
+    def test_11_cli_rejects_invalid_report_before_creating_output(self):
+        report = self.root / "wrong-extension.txt"
+        with self.assertRaisesRegex(ValueError, "JSON"):
+            module.cli([str(self.original), str(self.edited), str(self.mask),
+                        str(self.output), "--report", str(report)])
+        self.assertFalse(self.output.exists())
+
+    def test_12_cli_existing_report_protects_existing_files(self):
+        report = self.root / "previous.json"
+        report.write_text("private existing report")
+        with self.assertRaises(FileExistsError):
+            module.cli([str(self.original), str(self.edited), str(self.mask),
+                        str(self.output), "--report", str(report)])
+        self.assertEqual(report.read_text(), "private existing report")
+        self.assertFalse(self.output.exists())
+
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
