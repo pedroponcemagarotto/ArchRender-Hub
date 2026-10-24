@@ -1,3 +1,10 @@
+
+## OBSOLETO PARA A ESCOLHA DE PROVEDOR — política financeira P0 atualizada
+
+**Atenção: pesquisa histórica anterior à decisão do usuário de 23/10/2026.** O usuário determinou **nenhum gasto adicional com IA**, além da assinatura atual do ChatGPT. Portanto os exemplos de custo e conectores Runway, Higgsfield e Luma abaixo são **somente referência histórica e NÃO devem ser contratados, ativados ou sugeridos como próximo passo pago**. Não utilizar créditos tarifáveis nem iniciar recargas. Preferir ChatGPT nativo para imagens e ferramentas locais gratuitas, sem novo motor externo pago.
+
+Documento vigente: [Política de Custo Zero](POLITICA_CUSTO_ZERO_IA.md). A assinatura ChatGPT e API OpenAI são faturadas separadamente.
+
 # ArchRender Hub — vídeo por conectores ChatGPT / serviços
 
 **Verificação:** 2026-10-23. **Status:** pesquisa de preços e conectores confirmada; serviços **não conectados nem testados com arquivos privados**, nenhuma geração paga executada.
