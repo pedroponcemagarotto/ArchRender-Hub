@@ -115,3 +115,10 @@ python tools/pipeline_img2img_r5.py \
 O programa sempre grava `client_approved=false` e `benchmark_completed=false`. Para imagens candidatas de ajuste fotométrico local, use `--candidate-mode local_color`; para resultados de IA image-to-image que **comprovadamente usaram o original**, `--candidate-mode image_edit`, `--source-inspected` e `--binding-evidence` podem registrar evidência declarada, mas **não garantem aprovação**. Não confundir declaração do operador com atestado criptográfico do serviço.
 
 **Nova bateria:** 12 testes do compositor, 8 do orquestrador; 52/52 na reconstrução integrada local. Ver [relatório R5](../research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md). A montagem com originais reais foi executada; gerador Krita/ComfyUI e benchmarking de IA A/B/C ainda pendentes.
+
+
+## 8. Orçamento de IA P0 — ChatGPT existente apenas
+
+**Nova regra de 23/10/2026:** somente a assinatura do ChatGPT já existente é custo de IA aceitável. Mesmo que o Krita AI Diffusion ofereça backend em nuvem, **não contratar nem usar serviço cobrado**. Manter somente o **servidor local gratuito** com modelos cuja licença permita o uso pretendido, ou fazer edições nativas aqui no ChatGPT, sem presumir API gratuita.
+
+A instalação local é opcional e o PC Host permanece condição apenas para inferência automática local. O compositor R5, QA R4 e orquestrador continuam utilizáveis no ambiente gratuito sem motor generativo. A [política vinculante](POLITICA_CUSTO_ZERO_IA.md) tem precedência sobre quaisquer exemplos comerciais e impede fallback automático para Runway/Luma/fal.ai/Replicate/OpenAI API pagos.
