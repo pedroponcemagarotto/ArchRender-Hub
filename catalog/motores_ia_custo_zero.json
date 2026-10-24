@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "policy_date": "2026-10-23",
+  "max_extra_ai_cost_brl": 0,
+  "allow_paid_ai": false,
+  "allowed_engines": [
+    {
+      "id": "chatgpt_manual",
+      "name": "ChatGPT (manual nesta conversa)",
+      "enabled": true,
+      "supports_automated_external_generation": false,
+      "requires_user_subscription": "ChatGPT existente",
+      "additional_paid_ai_cost_brl": 0,
+      "availability": "recursos e limites do plano existente",
+      "output_transfer": "manual, nunca reutilizar credenciais nem fingir API sem custo"
+    },
+    {
+      "id": "offline_editing",
+      "name": "Mascara, QA, refino e composicao locais",
+      "enabled": true,
+      "supports_automated_external_generation": false,
+      "additional_paid_ai_cost_brl": 0,
+      "availability": "funcionalidades ja implementadas; sem inferencia generativa",
+      "output_transfer": "arquivos privados locais ou navegador"
+    },
+    {
+      "id": "comfyui_local",
+      "name": "ComfyUI local com modelos gratuitos de licenca compativel",
+      "enabled": false,
+      "supports_automated_external_generation": true,
+      "additional_paid_ai_cost_brl": 0,
+      "availability": "pendente instalacao e homologacao no Dell G15, 6GB VRAM/16GB RAM",
+      "output_transfer": "local autenticado e protegido, quando construido"
+    }
+  ],
+  "prohibited_paid_services": [
+    "openai_api_paid",
+    "replicate_paid",
+    "fal_ai_paid",
+    "luma_api_paid",
+    "runway_paid",
+    "higgsfield_paid",
+    "paid_gpu_rental",
+    "paid_model_subscriptions"
+  ],
+  "rules": [
+    "Nenhum consumo, cartao, renovacao, upgrade, creditos ou fallback pago de IA",
+    "API OpenAI cobra separadamente da assinatura ChatGPT; nao permitir por padrao",
+    "A interface web nao tem backend gerador ChatGPT incluido sem tecnologia realmente elegivel/validada",
+    "Uma ferramenta com Sign in with ChatGPT e franquia do plano so pode ser incluida apos elegibilidade e zero custos separados confirmados; nao esta disponivel no Hub atualmente",
+    "Hospedagem externa, dominios e infraestrutura tem orcamento separado e precisam de autorizacao"
+  ]
+}
