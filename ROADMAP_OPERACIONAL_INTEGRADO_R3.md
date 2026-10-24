@@ -169,3 +169,14 @@ O módulo de imagem evoluiu para um pipeline não generativo e reproduzível:
 Piloto real: cozinha original 1536x864 + candidato fotométrico local + máscara de parede + proteção de sofá, **0 alterações fora das máscaras, 0 na área protegida**, total 418.142 pixels alterados só dentro da região permitida; o compositor + QA entregaram relatório privado `client_approved=false` e `benchmark_completed=false`.
 
 **Importante:** Isto prova proteção **da área não autorizada**; não prova que uma IA recebeu a imagem, nem que preservou detalhes **dentro** da máscara. O piloto generativo R3-04 continua **0/6** até existir img2img verdadeiro com documento de referência. PC Host e suíte completa continuam pendentes. Sem Actions/merge/cópias de projetos de clientes ao GitHub.
+
+
+## L. Restrição econômica P0: somente assinatura do ChatGPT existente
+
+**Decisão superior aos planos anteriores, registrada 23/10/2026:** o usuário aceita **R$ 0 de gastos adicionais com IA**; única assinatura aceita é a do ChatGPT já existente. Ver [Política Vinculante](knowledge/POLITICA_CUSTO_ZERO_IA.md) e [allowlist de motores](catalog/motores_ia_custo_zero.json).
+
+**Não construir nem ativar API de IA paga** (incluindo OpenAI API, Replicate, fal.ai, Luma, Runway/Higgsfield com cobrança, instâncias de GPU alugadas ou créditos). Não sugerir aquisição de modelos pagos ou créditos, recarga automática, upgrade ou fallback cobrado. Custos não relacionados a IA (hospedagem/domínio/energia) requerem autorização e orçamento separados.
+
+**Estratégia:** interface web independente do Dell para upload, contratos, QA R4, máscaras/composição R5, catálogo e histórico. Geração/edição nativa do ChatGPT **ocorre nesta conversa**, limitada ao plano e com transferência manual segura de arquivos para o Hub. Backend automatizado generativo só por **ComfyUI local gratuito** quando PC disponível e homologado (inicialmente desabilitado). Não confundir assinatura do ChatGPT com faturamento de API: são separados por padrão.
+
+**Repercussão:** R6-R8 sem PC devem focar código, UI, segurança, integração dos módulos e testes. Nenhuma parte pode depender de cloud AI paga. Pesquisa de serviços pagos tem valor histórico, mas não autoriza sua integração. Benchmark AI A/B/C segue 0/6 até edição com entrada real comprovada.
