@@ -179,3 +179,12 @@ python tools/pipeline_img2img_r5.py --original data/privado/original.jpg --candi
 Ver [tutorial local R5](knowledge/PIPELINE_IMG2IMG_LOCAL_R5.md) e [relatório de teste R5](research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md). No piloto com cozinha original 1536 × 864, foram registrados **zero pixels alterados fora da máscara e da proteção do sofá**, mantendo revisão manual obrigatória.
 
 **Validação:** 52/52 testes locais aprovados em módulos com código/testes de hashes idênticos aos arquivos da PR. **Não é execução do checkout integral exato**: o teste local usou fixtures nas receitas e no catálogo de imagens, e os testes de vídeo/Windows não entraram no lote. As seis gerações A/B/C de IA img2img com referência comprovada continuam pendentes **0/6**. A ferramenta é local e **não executa nem instala um modelo de IA**; o candidato deve ser produzido com ferramenta de imagem realmente alimentada pelo original.
+
+
+## Política P0 — zero gasto adicional com IA (23/10/2026)
+
+**Decisão vinculante do usuário:** a única assinatura de IA permitida é a do **ChatGPT já contratado**. Nenhuma assinatura, API, crédito ou aluguer de GPU de IA adicional. Seguir sempre a [Política de Custo Zero](knowledge/POLITICA_CUSTO_ZERO_IA.md) e o [catálogo de motores permitidos](catalog/motores_ia_custo_zero.json), que define `allow_paid_ai=false` e orçamento de IA extra **R$ 0**.
+
+**Arquitetura em vigor:** ChatGPT (geração/edição **nesta conversa**, com transferência manual do resultado quando necessário), ferramentas do Hub para máscaras e QA, e **ComfyUI local gratuito** como backend futuro, **desabilitado até homologação do Dell**. A interface web pode funcionar independentemente do PC para tarefas determinísticas, mas **a assinatura do ChatGPT não fornece API gratuita para automatizar a geração no Hub**. Não implementar botão de geração por API paga nem fallback silencioso.
+
+Apenas integrações oficialmente elegíveis a usar franquia já incluída no plano poderão ser consideradas futuramente, após confirmação expressa de elegibilidade, limite e ausência de cobranças independentes; nenhuma está homologada no Hub. **As tabelas antigas de provedores pagos servem somente para histórico e comparação, não para contratação.**
