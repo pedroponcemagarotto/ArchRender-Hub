@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-10-23",
+  "catalog_status": "baseline_editorial_nao_testado",
+  "product_goal": "ChatGPT prepara e executa criacao de imagens a partir de fontes do usuario; video condicionado a ferramenta disponivel.",
+  "recipes": [
+    {
+      "id": "AR-PLAN-HUM-001",
+      "title": "Planta humanizada fiel",
+      "category": "planta_humanizada",
+      "path": "knowledge/prompts/01_planta_humanizada.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-PLAN-TEC-001",
+      "title": "Planta baixa tecnica/apresentada",
+      "category": "planta_tecnica",
+      "path": "knowledge/prompts/02_planta_tecnica.md",
+      "mode": "T",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-EXT-3D-001",
+      "title": "Fachada e exterior 3D",
+      "category": "fachada_exterior",
+      "path": "knowledge/prompts/03_fachada_exterior_3d.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-INT-001",
+      "title": "Interior realista",
+      "category": "interiores",
+      "path": "knowledge/prompts/04_interiores.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-WHITEBOX-001",
+      "title": "Croqui/whitebox para render",
+      "category": "croqui_modelo",
+      "path": "knowledge/prompts/05_croqui_modelo_render.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-LAND-001",
+      "title": "Paisagismo",
+      "category": "paisagismo",
+      "path": "knowledge/prompts/06_paisagismo.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-MAT-LUZ-001",
+      "title": "Troca de materiais e iluminação",
+      "category": "materiais_iluminacao",
+      "path": "knowledge/prompts/07_materiais_iluminacao.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-VIDEO-001",
+      "title": "Vídeo de apresentação",
+      "category": "video",
+      "path": "knowledge/prompts/08_video_apresentacao.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    },
+    {
+      "id": "AR-CORR-001",
+      "title": "Correções controladas",
+      "category": "correcao",
+      "path": "knowledge/prompts/09_correcao_controlada.md",
+      "mode": "F",
+      "status": "candidato_nao_testado"
+    }
+  ]
+}

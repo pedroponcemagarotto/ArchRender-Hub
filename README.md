@@ -1,5 +1,8 @@
 # ArchRender Hub — V0.1.0
 
+
+> **Fluxo visual com ChatGPT:** a V0.1 abaixo é um catálogo local. O novo [Prompt System v1](PROMPT_SYSTEM_v1.md) reúne receitas especializadas para produção assistida de plantas humanizadas, plantas baixas, fachadas, interiores, paisagismo e vídeos; consulte [protocolo](knowledge/OPERACAO_COM_CHATGPT.md) e [fontes](knowledge/FONTES_E_CURADORIA.md). **O usuário solicita a imagem e o ChatGPT a cria com ferramenta disponível; o banco local não gera imagens nem vídeos sozinho.** Prompts do V1 estão em status de candidatos até passarem por testes reais.
+
 Biblioteca **local e privada** de prompts e receitas para visualização arquitetônica. Interface em português do Brasil. Não precisa de Docker, GPU, API paga ou conta na nuvem. Construída com Python (biblioteca padrão), SQLite, HTML, CSS e JavaScript.
 
 > **Estado:** MVP local para uso individual. As receitas de demonstração são exemplos autorais sem renders gerados. Os resultados dos prompts não foram testados em serviços externos. Não é CAD/BIM e nenhuma regra textual garante a preservação de geometria: valide a imagem gerada contra os desenhos do projeto.
@@ -77,3 +80,111 @@ Este ZIP está pronto para ser iniciado em um repositório Git próprio. Para pu
 ## Fontes e licença do conteúdo
 
 As receitas de demonstração foram escritas para este projeto e não são reproduções de prompts de repositórios alheios. Antes de importar receitas ou imagens de outras fontes, verifique atribuição, termos de uso e autorização do autor.
+
+
+## Novo complemento experimental: vídeos gratuitos no próprio PC
+
+Além da biblioteca V0.1, esta branch disponibiliza um **gerador independente de MP4 offline**, com interface Windows em \`INICIAR_VIDEO_WINDOWS.bat\`, GUI Python e FFmpeg. É opcional, **não substitui** o app atual, não requer GPU, Docker, assinatura nem API paga e não envia imagens para a internet. Usa fotos/renders aprovados e realiza *pan*, *zoom* suave e transições; **não** gera vídeo com IA, pessoas em movimento nem visita 3D autêntica.
+
+**Como usar no Windows:** instale o FFmpeg gratuito pelo site oficial https://ffmpeg.org/download.html, configure-o no PATH (ou selecione o executável na GUI), execute \`INICIAR_VIDEO_WINDOWS.bat\`, selecione imagens, ordene os planos, escolha 720p/1080p e salve o MP4. Para títulos/músicas, use o editor gratuito [Shotcut](https://shotcut.com/). Para animação de profundidade opcional, investigamos [DepthFlow](https://github.com/BrokenSource/DepthFlow) sob sua licença AGPL-3.0; não está instalado ou integrado como dependência.
+
+- [Manual do vídeo gratuito](knowledge/VIDEO_GRATUITO_PC.md)
+- [Métodos de projetos GitHub incorporados](knowledge/INTEGRACOES_GITHUB_R1.md)
+- [Roteador de receitas do ChatGPT](knowledge/ROTEADOR_DE_RECEITAS_R1.md)
+- [Testes do complemento](tests/test_video_local.py) — verificação local com FFmpeg quando presente; não há GitHub Actions.
+
+**Status:** este complemento entrou como código na PR de desenvolvimento e o fluxo de FFmpeg foi experimentado no ambiente de teste com 2 imagens e um MP4 de 7,5 s/720p. **O PC Host não foi homologado** (conector desconectado na verificação). As imagens e o vídeo de demonstração não foram enviados ao GitHub público. Não confundir o novo gerador com função do banco local V0.1: o inicializador de vídeo é separado.
+
+## Método integrado R3 — imagens arquitetônicas primeiro
+
+O [Roadmap Operacional Integrado R3](ROADMAP_OPERACIONAL_INTEGRADO_R3.md) organiza o aprendizado dos repositórios externos numa sequência auditável: **entrada original → receita apropriada → prompt A/B/C → gate geométrico → comparação visual → registro privado**. A integração atual utiliza **conceitos autorais e arquivos locais**; não instala automaticamente ControlNet, modelos terceiros ou conectores pagos.
+
+O novo roteador **isolado do aplicativo V0.1** está em `tools/metodo_integrado.py` (Python 3.9+, somente biblioteca padrão). Ele lista as nove receitas, prepara contratos de prompts e registra avaliação humana em `data/workflows/`, pasta ignorada pelo Git. **Não** analisa pixels sozinho, não gera imagem, não concede aprovação de cliente e não modifica a base SQLite.
+
+```bash
+python tools/metodo_integrado.py list
+python tools/metodo_integrado.py prepare --task interiores --variant C --reference-id ref-cozinha-001 --preserve "janelas originais" --preserve "geladeira original" --change "melhorar luz"
+python -m unittest discover -s tests -v
+```
+
+O primeiro experimento comparativo está definido em [AR-BENCH-001 (cozinha/sala)](research/testes/AR-BENCH-001_CASO_INTERIORES_R3.md), com **seis gerações A/B/C pendentes** (não confundir com os experimentos exploratórios anteriores). Imagens privadas não entram no repositório.
+
+**Situação:** documentação e ferramenta auxiliar incorporadas à PR Draft; o benchmark R3 não foi executado. Interface local V0.1 permanece inalterada. A homologação no PC Host e o acoplamento do roteador à interface são fases posteriores.
+
+
+## Curadoria pública de imagens e atualização de fóruns — R1
+
+O Hub agora inclui um [catálogo de sete fontes públicas rastreáveis](catalog/fontes_publicas_r1.json) com duas cenas 3D (geometria verificável) e cinco fotografias de interiores/lavanderia/fachadas, mais uma [política de pesquisa de fóruns e licenças](research/CURADORIA_WEB_IMAGENS_FORUNS_R1.md).
+
+```bash
+python tools/metodo_integrado.py sources
+python tools/metodo_integrado.py sources --category fachadas
+python tools/metodo_integrado.py sources --json
+```
+
+O comando **só consulta metadados locais**; não acessa a internet, não baixa fotos, não gera render e não substitui os originais particulares do usuário. O GitHub contém links e crédito, **não imagens de terceiros**. As fontes serão usadas em benchmarks públicos **se e quando o gerador receber o arquivo de entrada real**, observadas as condições de licenciamento. Para cada lote relevante, a pesquisa de fóruns e documentos oficiais passa a ser etapa regular.
+
+**Status inicial:** 7 fontes curadas; **0 fontes baixadas, 0 testes públicos R1 executados**, R3-04 cozinha/sala privada ainda 0/6.
+
+
+## Proteção de vínculo da fonte e refino fiel R3
+
+A primeira verificação real com as imagens originais identificou um risco: **gerações por texto podem trocar todo o ambiente, mesmo quando o prompt descreve a referência**. Por isso, a ferramenta R3 agora separa **imagem editada a partir da original** de **texto-para-imagem**. Só pode ser candidata ao QA de fidelidade uma geração registrada com SHA-256 de fonte/saída, evidência de edição da fonte, identificação da ferramenta e **inspeção humana do original**. A marcação de evidência é declarativa e não fornece prova criptográfica de uso da imagem pelo provedor; a inspeção humana continua obrigatória.
+
+```bash
+python tools/metodo_integrado.py prepare --task interiores --reference-id ref-001 --variant C
+# Executar com um contrato gerado acima e com arquivos reais privados:
+python tools/metodo_integrado.py bind --file data/workflows/AR-WF-ID.json --original "caminho/original.png" --result "caminho/resultado.png" --mode image_edit --tool "ChatGPT Images" --source-inspected --binding-evidence "registro do provedor confirmando edicao a partir da fonte"
+python tools/metodo_integrado.py assess --file data/workflows/AR-WF-ID-generation-ID.json --geometry passou --camera passou --materials passou --artifacts passou --score 86
+```
+
+Sem prova de vínculo, mesmo uma nota 100 leva a `nao_elegivel_sem_referencia` (ou `reprovado` se houver falha geométrica real). **Não assuma que a ferramenta nativa vinculou a imagem só porque ela foi mencionada no prompt.**
+
+Para uma alternativa **sem redesenho nem assinatura**, `tools/refino_fotometrico.py` executa ajustes de brilho, contraste, cor, gamma e nitidez ligeira, **sem gerar móveis, janelas ou paredes**; é um complemento, não renderização fotorrealista com física de luz. Depende somente do Pillow opcional, e é uma ferramenta separada do app V0.1:
+
+```bash
+python -m pip install pillow
+python tools/refino_fotometrico.py original.jpg resultado.png --preset interior
+python tools/refino_fotometrico.py lavanderia.jpg resultado.png --preset lavanderia
+```
+
+No primeiro diagnóstico controlado com imagens privadas, duas fontes de 1536 × 864 tiveram saída na mesma resolução. A retenção de contornos com tolerância de 2 pixels foi de aproximadamente 99,6% e 99,9%, respectivamente, para ajustes fotométricos. Isso não equivale a provar que um resultado de IA preserva geometria. O teste visual A/B/C oficial permanece **0/6**. [Relatório de evidências](research/testes/AR-R3-04_DIAGNOSTICO_IMAGENS_ORIGINAIS_2026-10-23.md).
+
+Os novos testes da branch precisam ser rodados no checkout exato e no PC Host antes de homologação. Nenhum binário de cliente foi publicado.
+
+
+## Auditoria estrutural de imagens R4
+
+O novo [QA por contornos](tools/qa_geometria.py) (Python + OpenCV/NumPy opcionais) realiza **triagem local** entre a imagem original e o candidato, com relatórios globais e por regiões, visualização de contornos e bloqueio de diferenças de resolução. Preserva imagens de origem e não acessa a rede. **Não** aprova a arquitetura, não mede dimensões reais e não substitui o gate de comprovação de edição do original implementado em [metodo_integrado.py](tools/metodo_integrado.py).
+
+~~~bash
+python -m pip install numpy opencv-python
+python tools/qa_geometria.py original.jpg resultado.png --anchor janela:0.55,0.25,0.85,0.70 --json data/qa/resultado.json --visual data/qa/visual.png
+~~~
+
+[Relatório R4](research/testes/AR-R4_AUDITORIA_GEOMETRICA_2026-10-23.md): os 6 testes unitários do módulo passaram em container Linux; os 6 testes da API V0.1 base também passaram. A **suíte integral da branch atual não foi executada**, nem houve homologação no PC Host offline. Em dois pares reais de **refino não generativo** houve alta retenção de contornos; uma geração por texto alterou a arquitetura e foi rejeitada como teste fiel. O benchmark A/B/C com fonte comprovada continua **0/6**. Os arquivos originais e de saída não entram no GitHub público.
+
+
+## Fluxo integrado com máscaras R5 (testado localmente)
+
+O ArchRender Hub incorpora [composição segura de pixels](tools/compor_edicao_mascarada.py) e um [pipeline R5](tools/pipeline_img2img_r5.py) que conecta: original → candidato → máscara de edição + máscara opcional de proteção rígida → PNG final sem perdas → QA por contornos e âncoras → relatório local privado, **sem aprovação automática**.
+
+**Uma única execução para preparar o teste e registrar o diagnóstico:**
+
+```bash
+python -m pip install pillow numpy opencv-python
+python tools/pipeline_img2img_r5.py --original data/privado/original.jpg --candidate data/privado/candidato.png --mask data/privado/mascara.png --output data/privado/saida.png --reference-id ref-interior-001 --candidate-mode unknown
+```
+
+Ver [tutorial local R5](knowledge/PIPELINE_IMG2IMG_LOCAL_R5.md) e [relatório de teste R5](research/testes/AR-R5_PIPELINE_MASCARAS_EXECUCAO_2026-10-23.md). No piloto com cozinha original 1536 × 864, foram registrados **zero pixels alterados fora da máscara e da proteção do sofá**, mantendo revisão manual obrigatória.
+
+**Validação:** 52/52 testes locais aprovados em módulos com código/testes de hashes idênticos aos arquivos da PR. **Não é execução do checkout integral exato**: o teste local usou fixtures nas receitas e no catálogo de imagens, e os testes de vídeo/Windows não entraram no lote. As seis gerações A/B/C de IA img2img com referência comprovada continuam pendentes **0/6**. A ferramenta é local e **não executa nem instala um modelo de IA**; o candidato deve ser produzido com ferramenta de imagem realmente alimentada pelo original.
+
+
+## Política P0 — zero gasto adicional com IA (23/10/2026)
+
+**Decisão vinculante do usuário:** a única assinatura de IA permitida é a do **ChatGPT já contratado**. Nenhuma assinatura, API, crédito ou aluguer de GPU de IA adicional. Seguir sempre a [Política de Custo Zero](knowledge/POLITICA_CUSTO_ZERO_IA.md) e o [catálogo de motores permitidos](catalog/motores_ia_custo_zero.json), que define `allow_paid_ai=false` e orçamento de IA extra **R$ 0**.
+
+**Arquitetura em vigor:** ChatGPT (geração/edição **nesta conversa**, com transferência manual do resultado quando necessário), ferramentas do Hub para máscaras e QA, e **ComfyUI local gratuito** como backend futuro, **desabilitado até homologação do Dell**. A interface web pode funcionar independentemente do PC para tarefas determinísticas, mas **a assinatura do ChatGPT não fornece API gratuita para automatizar a geração no Hub**. Não implementar botão de geração por API paga nem fallback silencioso.
+
+Apenas integrações oficialmente elegíveis a usar franquia já incluída no plano poderão ser consideradas futuramente, após confirmação expressa de elegibilidade, limite e ausência de cobranças independentes; nenhuma está homologada no Hub. **As tabelas antigas de provedores pagos servem somente para histórico e comparação, não para contratação.**

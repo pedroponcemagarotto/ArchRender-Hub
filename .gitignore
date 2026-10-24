@@ -8,3 +8,27 @@ __pycache__/
 Thumbs.db
 *.log
 .env
+
+# Nao versionar dados de clientes, renders e video privados
+/clientes/
+/client-assets/
+/private/
+/outputs/
+/renders/
+/videos/
+/entregas/
+/workspaces-private/
+*.sqlite
+*.sqlite3
+
+
+# Nao versionar entregas multimidia nem trilhas de clientes
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.m4a
+*.wav
+*.flac

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "example_only": true,
+  "id": "DEMO-SEM-GERACAO-001",
+  "date": "2026-10-23",
+  "client_reference": "EXEMPLO_FICTICIO_NAO_PUBLICAR_DADOS",
+  "task": "planta_humanizada",
+  "mode": "F",
+  "recipe_id": "AR-PLAN-HUM-001",
+  "recipe_version": "1.0",
+  "prompt_used": "Texto efetivo da tentativa seria registrado aqui. NENHUMA GERACAO FOI FEITA.",
+  "model": "nao_executado",
+  "model_version": null,
+  "generator": null,
+  "input_references": [
+    {
+      "id": "ref-01",
+      "role": "geometria_base",
+      "location": "ARMAZENAMENTO_PRIVADO",
+      "permission_checked": false
+    }
+  ],
+  "output_references": [],
+  "rendered_dimensions_px": null,
+  "known_parameters": {},
+  "constraints": {
+    "preserve": [
+      "paredes",
+      "portas",
+      "janelas"
+    ],
+    "change": [
+      "materiais de piso",
+      "sombras leves"
+    ]
+  },
+  "review": {
+    "status": "candidato_nao_testado",
+    "critical_gate": "nao_avaliado",
+    "score": null,
+    "issues": [],
+    "reviewed_by": null
+  },
+  "client_approval": false,
+  "license_and_privacy": {
+    "contains_private_assets": false,
+    "public_safe_example": true
+  },
+  "notes": "Registro ilustrativo para demonstrar campos. Nunca confundir com teste realizado."
+}
