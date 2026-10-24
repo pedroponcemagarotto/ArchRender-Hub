@@ -171,3 +171,14 @@ Próximo trabalho com segurança: executar suíte atualizada no checkout real; e
 **Status:** 52/52 testes locais em módulos correspondentes às versões GitHub dos scripts/testes; as receitas/catálogo de fontes testadas foram fixtures, e vídeo ficou fora da bateria. Piloto de imagem protegida com cozinha original realmente executado, **zero alterações em pixels não autorizados**. Todos os registros privados ficaram fora da PR. **Não há render generativo image-to-image homologado nem vitória de A/B/C; 0/6**. 
 
 Quando o PC Host ficar online, escolher Krita AI Diffusion + ComfyUI **local**, iniciando modelo leve SD1.5 e região pequena com arquivo original realmente importado e máscara. Antes de qualquer instalação/download massivo, verificar SSD D:, NVIDIA RTX 3060 6 GB e RAM 16 GB; não habilitar serviços de rede desprotegidos nem consumir créditos pagos. **Continuar na PR #1 Draft; não mesclar a main e não usar GitHub Actions ou Incubadora Remote V2**.
+
+
+## Regra P0 irrevogável sem autorização: IA extra R$ 0
+
+**Diretriz expressa do usuário em 23/10/2026:** "O único gasto com ia que aceito é a assinatura do chatgpt que já tenho aqui". Esta decisão prevalece sobre propostas anteriores de integração de APIs/serviços de IA pagos. Ler **antes de qualquer alteração**:
+- [Política de Custo Zero](knowledge/POLITICA_CUSTO_ZERO_IA.md)
+- [Catálogo de motores permitidos](catalog/motores_ia_custo_zero.json)
+
+**Obrigatório:** nenhum cartão, crédito pago, plano mensal adicional, API cobrada, aluguel de GPU na nuvem ou fallback pago de IA. Orçamento de IA adicional **R$ 0**. Não considerar uma franquia gratuita temporária como componente obrigatório. O Hub deve trabalhar com (1) ChatGPT desta conversa, com geração dentro do plano disponível e eventual transferência manual, (2) processos determinísticos gratuitos no Hub, e (3) ComfyUI/Krita AI Diffusion **local e gratuito, opcional, não instalado**. Não assumir que um web app externo pode usar a assinatura do ChatGPT via API sem custo: faturamentos separados. Ferramentas de Sign in with ChatGPT com compartilhamento de franquia só poderão ser examinadas mediante compatibilidade efetiva com o plano do usuário e autorização, **não homologadas aqui**.
+
+Próximos lotes: R6 suíte completa, R7 interface web integrada, R8 preparar adaptador local, R9 testes Windows quando PC conectar. R3-R5 permanecem e a PR #1 segue Draft sem merge/Actions. Não mudar para modelo API paga para destravar imagem generativa.
